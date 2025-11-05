@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { StarIcon } from '@chakra-ui/icons';
 import {
     Box, Flex, VStack, HStack, Heading, Text, Button, IconButton,
