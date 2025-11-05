@@ -1,11 +1,11 @@
 
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { ChakraProvider, ColorModeScript, extendTheme } from "@chakra-ui/react"
 import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
-import { store } from './app/store'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { ChakraProvider, ColorModeScript, extendTheme } from "@chakra-ui/react";
+import App from './App.tsx'
+import { store } from './app/store'
+import './index.css'
 const queryClient = new QueryClient()
 
 const config = {
