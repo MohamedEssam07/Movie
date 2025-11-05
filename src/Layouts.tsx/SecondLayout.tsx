@@ -1,6 +1,6 @@
-import { Outlet, useLocation } from "react-router";
+import { Outlet} from "react-router";
 
-import Filter from "../ui/Filter";
+
 import { Box, useBreakpointValue } from "@chakra-ui/react";
 
 import SearchNavbar from "../ui/SearchNavbar";
@@ -11,12 +11,8 @@ interface IProps {
 
 }
 const SecondLayout = ({ }: IProps) => {
-    const { pathname } = useLocation()
-    const showFilterRoutes = ["/movies", "/tv",];
-
-    const shouldShowFilter = showFilterRoutes.some((path) =>
-        pathname === (path)
-    )
+    
+    
 
 
     const windowScrollY = useBreakpointValue({ base: 1000 }) ?? 0;
