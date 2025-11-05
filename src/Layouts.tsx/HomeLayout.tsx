@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import Navbar from "../ui/Navbar";
 import ScrollToTopButton from "../ui/ScrollToUpButton";
 import { Box, useBreakpointValue } from "@chakra-ui/react";
-import { useEffect } from "react";
+
 
 interface IProps {
 

@@ -14,11 +14,9 @@ import { motion } from "framer-motion";
 import NoData from "../ui/NoData";
 
 
-interface IProps {
 
-}
 
-const FilterResultPage = ({ }: IProps) => {
+const FilterResultPage = () => {
     const bgCard = useColorModeValue("gray.50", "gray.800"); // light background
     const borderCard = useColorModeValue("gray.200", "gray.700"); // light border
     const MotionBox = motion(Box);
