@@ -1,5 +1,5 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { Box, Text } from "@chakra-ui/react";
+
 
 const ImageSkeleton = () => {
 

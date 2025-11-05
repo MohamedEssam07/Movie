@@ -1,6 +1,6 @@
 
 import { Box, IconButton, InputGroup, Image, Input, InputRightElement, VStack, Button, FormControl } from "@chakra-ui/react";
-import logo from "../assets/unnamed.jpg"
+
 import bglogo from "../assets/ana-de-armas-from-1920x1080-21932.jpg"
 import FancyText from "../ui/FancyText";
 import { CiSearch } from "react-icons/ci";

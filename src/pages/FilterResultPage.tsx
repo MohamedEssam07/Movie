@@ -37,7 +37,7 @@ const FilterResultPage = () => {
 
     }
     const onClickStart = () => {
-        setPage(prev => prev = 1)
+        setPage(page + 1);
 
     }
     const onClickPage = (item: number) => {

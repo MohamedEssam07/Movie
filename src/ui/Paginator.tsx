@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { HStack, Button, Text, VStack } from "@chakra-ui/react";
+import { HStack, Button, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 interface IProps {

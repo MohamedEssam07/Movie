@@ -20,7 +20,7 @@ import {
     Avatar,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Link, NavLink, Link as RouterLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import GenreMenu from "./GenreMenu";
 
 import bLogo from "../assets/BLogo.svg"

@@ -41,7 +41,7 @@ const HomeSearchResult = ({ }: IProps) => {
         setPage(prev => prev + 1)
     }
     const onClickStart = () => {
-        setPage(prev => prev = 1)
+        setPage(page + 1);
     }
     const onClickPage = (item: number) => {
         setPage(item)

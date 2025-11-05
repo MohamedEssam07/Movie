@@ -1,4 +1,4 @@
-import { Box, Image, Text, Spinner, VStack, Progress } from "@chakra-ui/react";
+import { Box, Image, Text, VStack, Progress } from "@chakra-ui/react";
 import Logo from "../assets/BLogo.svg"
 
 

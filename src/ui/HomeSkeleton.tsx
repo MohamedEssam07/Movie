@@ -1,4 +1,4 @@
-import { Box, Skeleton, SkeletonText, VStack, Heading } from "@chakra-ui/react";
+import { Box, Skeleton, VStack, Heading } from "@chakra-ui/react";
 
 const HomeSkeleton = () => {
     return (

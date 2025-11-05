@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { NavLink } from "react-router-dom";
-import logo from "../assets/unnamed.jpg";
+
 import bLogo from "../assets/BLogo.svg"
 const IntroNavbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();

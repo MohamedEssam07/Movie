@@ -7,13 +7,13 @@ import {
     Avatar,
     Button,
     Center,
-    Box,
+
     Text,
-    HStack,
+
     VStack,
     useColorMode,
 } from "@chakra-ui/react";
-import { ChevronDownIcon, SettingsIcon, ExternalLinkIcon, SmallCloseIcon, StarIcon } from "@chakra-ui/icons";
+import { SmallCloseIcon, StarIcon } from "@chakra-ui/icons";
 import CookieService from "../services/CookieService";
 import { useNavigate } from "react-router";
 import type { IUser } from "../Interfaces";
