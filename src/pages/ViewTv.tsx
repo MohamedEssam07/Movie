@@ -18,9 +18,9 @@ const ViewTv = ({ }: IProps) => {
     if (isLoading) return <MoviePageSkeleton />;
     if (!data) return <p>No data found</p>;
     return (
-        <Box h={"100vh"} mt={"-60px"} >
+        <Box minH="100vh" mt="0" overflowX="hidden">
             <ViewTvCard movieInfo={data} />
-            <Box mt={"30px"} display={"flex"} justifyContent={"center"} alignItems={"center"} h={"90vh"}>
+            <Box mt={"30px"} display={"flex"} justifyContent={"center"} alignItems={"center"} minH="auto" pb={10}>
 
                 <AnimatedCards id={id} />
 

@@ -89,8 +89,9 @@ const GenreMenu = () => {
                 onMouseEnter={() => !isMobile && setIsOpen(true)}
                 onMouseLeave={() => !isMobile && setIsOpen(false)}
                 onClick={() => setIsOpen(false)}
-                p={4}
-                minW="600px"
+                p={{ base: 3, md: 4 }}
+                minW={{ base: "280px", md: "600px" }}
+                maxW={{ base: "90vw", md: "600px" }}
                 bg={colorMode === "dark" ? "rgba(20, 20, 30, 0.65)" : "rgba(255, 255, 255, 0.6)"}
                 backdropFilter={colorMode === "dark" ? "blur(14px) saturate(160%)" : "blur(14px) saturate(160%)"}
                 border={colorMode === "dark" ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(200, 200, 200, 0.4)"}
@@ -98,7 +99,7 @@ const GenreMenu = () => {
                 borderRadius="xl"
             >
 
-                <SimpleGrid columns={{ base: 2, md: 4 }} spacing={7}>
+                <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={{ base: 3, md: 7 }}>
                     {genres.map((genre) => (
                         <NavLink key={genre.id} to={`/genre/${genre.id}`}>
                             <Box

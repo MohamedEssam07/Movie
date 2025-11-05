@@ -69,7 +69,7 @@ const SearchNavbar = () => {
             zIndex="1000"
             transition="0.3s"
             backdropFilter={scrolled ? "blur(10px)" : "none"}
-            bg={"transparent"}
+            bg="transparent"
             boxShadow={scrolled ? "0 2px 15px rgba(0,0,0,0.5)" : "none"}
 
         >
@@ -100,7 +100,7 @@ const SearchNavbar = () => {
                 {/* Center Links */}
                 <HStack
                     spacing={8}
-                    display={{ base: "none", md: "flex" }}
+                    display={{ base: "none", xl: "flex" }}
                     justify="center"
                     flex="1"
                 >
@@ -158,7 +158,7 @@ const SearchNavbar = () => {
                 </HStack>
 
                 {/* Right side (Search + Buttons + Color mode) */}
-                <HStack spacing={3} display={{ base: "none", md: "flex" }}>
+                <HStack spacing={3} display={{ base: "none", xl: "flex" }}>
                     <Box w="200px">
                         <AutoSearch />
                     </Box>
@@ -233,7 +233,7 @@ const SearchNavbar = () => {
 
                 {/* Mobile menu icon */}
                 <IconButton
-                    display={{ base: "flex", md: "none" }}
+                    display={{ base: "flex", xl: "none" }}
                     icon={<HamburgerIcon boxSize={6} />}
                     aria-label="Open Menu"
                     onClick={onOpen}

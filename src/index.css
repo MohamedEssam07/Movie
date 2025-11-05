@@ -1,0 +1,24 @@
+/* Global layout tweaks */
+html, body, #root {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Prevent accidental horizontal scrolling on small devices */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Use border-box layout to avoid width growth from padding/borders */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Media becomes responsive and won't exceed its container */
+img, video, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+

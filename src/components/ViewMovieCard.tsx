@@ -1,4 +1,4 @@
-import { Card, CardBody, CardFooter, Image, Text, ButtonGroup, Button, Box, IconButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, useDisclosure, HStack, VStack, Tooltip } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, Image, Text, Button, Box, IconButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, useDisclosure, HStack, VStack, Tooltip, Flex } from '@chakra-ui/react'
 import type { IImdbData, IMovieCredits, IProduct } from "../Interfaces";
 import { useAppDispatch, type RootState } from '../app/store';
 import { addFavourite, removeFavourite } from '../app/features/favouriteSlice';
@@ -54,8 +54,9 @@ const ViewMovieCard = ({ movieInfo }: IProps) => {
         <Box>
 
             <Box
-                mt="-4"
-                minH="110vh"
+                mt="0"
+                minH={{ base: "auto", md: "100vh" }}
+                pb={{ base: 10, md: 0 }}
                 bgImage={poster_path ? `url(https://image.tmdb.org/t/p/original${poster_path})` : `url(${bglogo})`}
                 bgRepeat="no-repeat"
                 bgSize="cover"
@@ -74,14 +75,16 @@ const ViewMovieCard = ({ movieInfo }: IProps) => {
             >
                 <BackButton onClick={() => nav(-1)} />
                 <Box
-                    mt={"60px"}
+                    mt={{ base: "60px", md: "60px" }}
                     display="flex"
-                    flexDir={{ base: "column", md: "row" }} // عمودي على الموبايل، أفقي على md وفوق
-                    gap={{ base: 6, md: 20 }} // مسافة أصغر على الموبايل
-                    mx={{ base: 4, md: 0 }} // مسافة أفقية صغيرة على الموبايل
+                    flexDir={{ base: "column", md: "row" }}
+                    gap={{ base: 6, md: 20 }}
+                    mx={{ base: 4, md: 0 }}
                     alignItems="center"
-                    justifyContent={{ base: "", md: "space-evenly" }}
+                    justifyContent={{ base: "center", md: "space-evenly" }}
                     w="full"
+                    maxW={{ base: "100%", md: "1200px", lg: "1450px" }}
+                    px={{ base: 4, md: 6, lg: 8 }}
                 >
                     <Card
                         order={{ base: 1, md: 0 }}
@@ -89,92 +92,71 @@ const ViewMovieCard = ({ movieInfo }: IProps) => {
                         bg="transparent"
                         color="white"
                         ml={{ base: "0px", md: "-70px" }}
-                        borderRadius="none" // يشيل أي دوران
-                        boxShadow="none" // يشيل أي ظل
-                        overflow="hidden" // يمنع أي overflow يبان
-
+                        borderRadius="none"
+                        boxShadow="none"
+                        overflow="hidden"
                     >
                         <CardBody display="flex" mt={{ base: "0px", md: "50px" }} flexDirection="column" gap={10} textAlign={{ base: "center", md: "left" }}>
                             <FancyText title={title} />
                             <Text fontSize={{ base: "sm", md: "md" }}>{overview}</Text>
 
-                            <ButtonGroup
+                            <Flex 
+                                direction={{ base: "column", md: "row" }} 
+                                gap={{ base: 2, md: 4 }}
+                                align="center"
+                                w="full" 
                                 ml={{ base: "0px", md: "-5px" }}
-                                w="full"
-                                display="flex"
-                                flexDirection={{ base: "column", sm: "row" }}
-                                gap={{ base: "10px", md: "10px" }}
                             >
-                                <WatchNowToggle imdbId={imdbData?.imdb_id} homepage={homepage} />
+                                <Box flex={{ base: "none", md: 1 }} w={{ base: "full", md: "auto" }}>
+                                    <WatchNowToggle imdbId={imdbData?.imdb_id} homepage={homepage} />
+                                </Box>
 
-                                <Button onClick={onOpen} w={"full"} variant="solid" bg={"transparent"} transition="all 0.5s ease"
+                                <Button 
+                                    onClick={onOpen} 
+                                    flex={{ base: "none", md: 1 }}
+                                    w={{ base: "full", md: "auto" }}
+                                    variant="solid" 
+                                    bg="transparent" 
+                                    transition="all 0.5s ease"
                                     _hover={{
                                         bgGradient: "linear(to-r, gray.500, gray.700)",
                                         transform: "scale(1.05)",
-                                        boxShadow: "0px 0px 20px rgba(59, 130, 246, 0.6)", // blue glow
-                                    }} border={"1px"} color="white" borderRadius="full" size="lg" >
+                                        boxShadow: "0px 0px 20px rgba(59, 130, 246, 0.6)",
+                                    }} 
+                                    border="1px" 
+                                    color="white" 
+                                    borderRadius="full" 
+                                    size="lg"
+                                >
                                     Trailer
                                 </Button>
-                                {isFavourite ?
-                                    (token ?
-                                        <IconButton
-                                            icon={<StarIcon />}
-                                            aria-label="Add to favourite"
-                                            h="50px"
-                                            w="full"
-                                            borderRadius="full"
-                                            variant="solid"
-                                            bgGradient={isFavourite ? "linear(to-r, yellow.400, yellow.500)" : "white"}
-                                            onClick={() => isFavourite ? dispatch(removeFavourite(movieInfo)) : dispatch(addFavourite(movieInfo))}
-                                        />
-                                        :
-                                        null
-                                    )
-                                    :
-                                    (token ?
-                                        <Tooltip label={!token && "You must be logged in to use this button"} hasArrow>
-
-                                            <IconButton
-                                                icon={<StarIcon />}
-                                                aria-label="Add to favourite"
-                                                h="50px"
-                                                w="full"
-                                                borderRadius="full"
-                                                variant="solid"
-                                                bgGradient={isFavourite ? "linear(to-r, yellow.400, yellow.500)" : "white"}
-                                                disabled={!token}
-                                                onClick={() => dispatch(addFavourite(movieInfo))}
-                                            />
-
-                                        </Tooltip>
-                                        :
-                                        <Tooltip label="You must be logged in to use this button" hasArrow>
-
-                                            <IconButton
-                                                icon={<StarIcon />}
-                                                aria-label="Add to favourite"
-                                                h="50px"
-                                                w="full"
-                                                borderRadius="full"
-                                                variant="solid"
-                                                bgGradient={isFavourite ? "linear(to-r, yellow.400, yellow.500)" : "white"}
-                                                disabled={!token}
-                                            />
-
-                                        </Tooltip>
-
-                                    )
-                                }
-
-
-                            </ButtonGroup>
-                            <HStack spacing={7}>
+                                <Tooltip label={!token && "You must be logged in to use this button"} hasArrow>
+                                    <IconButton
+                                        icon={<StarIcon />}
+                                        aria-label="Add to favourite"
+                                        h="50px"
+                                        flex={{ base: "none", md: 1 }}
+                                        w={{ base: "full", md: "auto" }}
+                                        borderRadius="full"
+                                        variant="solid"
+                                        bgGradient={isFavourite ? "linear(to-r, yellow.400, yellow.500)" : "white"}
+                                        disabled={!token}
+                                        onClick={() => {
+                                            if (token) {
+                                                isFavourite ? dispatch(removeFavourite(movieInfo)) : dispatch(addFavourite(movieInfo))
+                                            }
+                                        }}
+                                    />
+                                </Tooltip>
+                            </Flex>
+                            <HStack spacing={7} flexWrap="wrap" justifyContent={{ base: "center", md: "flex-start" }}>
                                 {MovieCredits?.cast.slice(0, 3).map((item: IMovieCredits, idx: number) => (
                                     <VStack
                                         key={idx}
                                         w="120px"
                                         alignItems="center"
                                         spacing={1}
+                                        flexShrink={0}
                                     >
                                         <Box
                                             position="relative"
@@ -235,13 +217,11 @@ const ViewMovieCard = ({ movieInfo }: IProps) => {
 
                     <Card
                         ml={{ base: "", md: "40px" }}
-
                         mt={{ base: "50px", md: "" }}
                         maxW={{ base: "full", md: "sm" }}
                         bg="gray.800"
                         color="white"
                         h={{ base: "550px", md: "620px" }}
-
                         overflow="hidden"
                         boxShadow="xl"
                     >

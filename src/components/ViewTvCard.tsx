@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Card, CardBody, CardFooter, Image, Heading, Stack, Text, Divider, ButtonGroup, Button, Box, Badge, VStack, IconButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, useDisclosure, HStack } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, Image, Heading, Stack, Text, Divider, ButtonGroup, Button, Box, Badge, VStack, IconButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, useDisclosure, HStack, Flex, Tooltip } from '@chakra-ui/react'
 import type { IImdbData, IMovieCredits, IProduct } from "../Interfaces";
 import { useAppDispatch, type RootState } from '../app/store';
 import { addFavourite, removeFavourite } from '../app/features/favouriteSlice';
@@ -16,6 +16,7 @@ import { useGetTvCreditsQuery, useGetTvImdbQuery } from '../app/services/apiSlic
 import WatchNowDropdown from '../ui/WatchNowDropdown';
 import WatchNowToggle from '../ui/WatchNowDropdown';
 import { memo, useEffect } from 'react';
+import CookieService from '../services/CookieService';
 
 
 
@@ -41,7 +42,7 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
     console.log(movieInfo.imdb_id)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const favourites = useSelector((state: RootState) => state.favourite.items);
-
+    const token = CookieService.get("jwt")
     const isFavourite = favourites.some((item) => item.id === movieInfo.id);
 
     //imdb
@@ -59,8 +60,9 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
     return (
         <Box>
             <Box
-                mt="-4"
-                minH="110vh"
+                mt="0"
+                minH={{ base: "auto", md: "100vh" }}
+                pb={{ base: 10, md: 0 }}
                 bgImage={poster_path ? `url(https://image.tmdb.org/t/p/original${poster_path})` : `url(${bglogo})`}
                 bgRepeat="no-repeat"
                 bgSize="cover"
@@ -80,44 +82,45 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
 
                 <BackButton onClick={() => nav(-1)} />
                 <Box
-                    mt={"60px"}
+                    mt={{ base: "60px", md: "60px" }}
                     display="flex"
-                    flexDir={{ base: "column", md: "row" }} // عمودي على الموبايل، أفقي على md وفوق
-                    gap={{ base: 6, md: 20 }} // مسافة أصغر على الموبايل
-                    mx={{ base: 4, md: 0 }} // مسافة أفقية صغيرة على الموبايل
+                    flexDir={{ base: "column", md: "row" }}
+                    gap={{ base: 6, md: 20 }}
+                    mx={{ base: 4, md: 0 }}
                     alignItems="center"
-                    justifyContent={{ base: "", md: "space-evenly" }}
+                    justifyContent={{ base: "center", md: "space-evenly" }}
                     w="full"
+                    maxW={{ base: "100%", md: "1200px", lg: "1450px" }}
+                    px={{ base: 4, md: 6, lg: 8 }}
                 >
                     {/* Card النصوص */}
                     <Card
-
                         order={{ base: 1, md: 0 }}
                         maxW={{ base: "full", md: "md" }}
                         bg="transparent"
                         color="white"
                         ml={{ base: "0px", md: "-70px" }}
-                        borderRadius="none" // يشيل أي دوران
-                        boxShadow="none" // يشيل أي ظل
-                        overflow="hidden" // يمنع أي overflow يبان
-
-
+                        borderRadius="none"
+                        boxShadow="none"
+                        overflow="hidden"
                     >
-                        <CardBody display="flex" mt={{ base: "0px", md: "50px" }} flexDirection="column" gap={10} textAlign={{ base: "center", md: "left" }}>
+                        <CardBody display="flex" mt={{ base: "0px", md: "50px" }} flexDirection="column" gap={{ base: 6, md: 10 }} textAlign={{ base: "center", md: "left" }}>
 
                             <FancyText title={name} />
-                            <Text>{overview}</Text>
-                            <ButtonGroup ml={{ base: "0px", md: "-5px" }}
-                                w="full"
-                                display="flex"
-                                flexDirection={{ base: "column", sm: "row" }}
-                                gap={{ base: "10px", md: "10px" }}
-
+                            <Text fontSize={{ base: "sm", md: "md" }} lineHeight={{ base: "1.5", md: "1.6" }}>{overview}</Text>
+                            <Flex 
+                                direction={{ base: "column", md: "row" }} 
+                                gap={{ base: 2, md: 4 }}
+                                align="center"
+                                w="full" 
+                                ml={{ base: "0px", md: "-5px" }}
                             >
-
-                                <WatchNowToggle imdbId={imdbData?.imdb_id} homepage={homepage} />
+                                <Box flex={{ base: "none", md: 1 }} w={{ base: "full", md: "auto" }}>
+                                    <WatchNowToggle imdbId={imdbData?.imdb_id} homepage={homepage} />
+                                </Box>
                                 <Button
-                                    w="full"
+                                    flex={{ base: "none", md: 1 }}
+                                    w={{ base: "full", md: "auto" }}
                                     variant="solid"
                                     bg="transparent"
                                     _hover={{
@@ -127,40 +130,49 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
                                     border="1px"
                                     color="white"
                                     borderRadius="full"
-                                    size="lg"
+                                    size={{ base: "md", md: "lg" }}
+                                    fontSize={{ base: "sm", md: "md" }}
                                     onClick={onOpen}
                                 >
                                     Trailer
                                 </Button>
-                                <IconButton
-                                    icon={<StarIcon />}
-                                    aria-label="Add to favourite"
-                                    h="50px"
-                                    w="full"
-
-                                    borderRadius="full"
-                                    variant="solid"
-                                    bgGradient={isFavourite ? "linear(to-r, yellow.500, yellow.400)" : ""}
-                                    onClick={() => isFavourite ? dispatch(removeFavourite(movieInfo)) : dispatch(addFavourite(movieInfo))}
-                                />
-                            </ButtonGroup>
-                            <HStack spacing={7}>
+                                <Tooltip label={!token && "You must be logged in to use this button"} hasArrow>
+                                    <IconButton
+                                        icon={<StarIcon />}
+                                        aria-label="Add to favourite"
+                                        h={{ base: "45px", md: "50px" }}
+                                        flex={{ base: "none", md: 1 }}
+                                        w={{ base: "full", md: "auto" }}
+                                        borderRadius="full"
+                                        variant="solid"
+                                        bgGradient={isFavourite ? "linear(to-r, yellow.500, yellow.400)" : "white"}
+                                        disabled={!token}
+                                        onClick={() => {
+                                            if (token) {
+                                                isFavourite ? dispatch(removeFavourite(movieInfo)) : dispatch(addFavourite(movieInfo))
+                                            }
+                                        }}
+                                    />
+                                </Tooltip>
+                            </Flex>
+                            <HStack spacing={{ base: 4, md: 7 }} flexWrap={{ base: "wrap", md: "nowrap" }} justifyContent={{ base: "center", md: "flex-start" }}>
                                 {TvCredits?.cast.slice(0, 3).map((item: IMovieCredits, idx: number) => (
                                     <VStack
                                         key={idx}
-                                        w="120px"
+                                        w={{ base: "100px", md: "120px" }}
                                         alignItems="center"
                                         spacing={1}
+                                        flexShrink={0}
                                     >
                                         <Box
                                             position="relative"
-                                            w="120px"
-                                            h="120px"
+                                            w={{ base: "100px", md: "120px" }}
+                                            h={{ base: "100px", md: "120px" }}
                                             flexShrink={0}
                                         >
                                             <Image
-                                                w="120px"
-                                                h="120px"
+                                                w={{ base: "100px", md: "120px" }}
+                                                h={{ base: "100px", md: "120px" }}
                                                 borderRadius="3xl"
                                                 src={`https://image.tmdb.org/t/p/w500/${item?.profile_path}`}
                                                 objectFit="cover"
@@ -187,15 +199,16 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
                                                 _hover={{ opacity: 1 }}
                                                 textAlign="center"
                                                 p={2}
+                                                fontSize={{ base: "xs", md: "sm" }}
                                             >
                                                 {item?.character}
                                             </Text>
                                         </Box>
 
-                                        <Box h="40px" overflow="hidden">
+                                        <Box h={{ base: "35px", md: "40px" }} overflow="hidden">
                                             <Text
                                                 noOfLines={2}
-                                                fontSize="sm"
+                                                fontSize={{ base: "xs", md: "sm" }}
                                                 textAlign="center"
                                             >
                                                 {item?.original_name}
@@ -209,15 +222,12 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
 
                     {/* Card الصورة */}
                     <Card
-
                         ml={{ base: "", md: "40px" }}
-
                         mt={{ base: "50px", md: "" }}
                         maxW={{ base: "full", md: "sm" }}
                         bg="gray.800"
                         color="white"
-                        h={{ base: "550px", md: "620px" }} //
-
+                        h={{ base: "550px", md: "620px" }}
                         overflow="hidden"
                         boxShadow="xl"
                     >
@@ -236,22 +246,32 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
                 </Box>
 
                 {/* Modal */}
-                <Modal isOpen={isOpen} onClose={onClose} isCentered size="4xl">
+                <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", md: "4xl" }}>
                     <ModalOverlay bg="blackAlpha.800" backdropFilter="blur(4px)" />
-                    <ModalContent bg="transparent" boxShadow="none">
+                    <ModalContent bg="transparent" boxShadow="none" mx={{ base: 4, md: 0 }}>
                         <ModalCloseButton color="white" />
                         <ModalBody p={0}>
-                            <iframe
-                                width="100%"
-                                height="480"
-                                src={`https://www.youtube.com/embed/${ytData?.results[0]?.key}`}
-                                title="Movie Trailer"
-                                allowFullScreen
-                                style={{
-                                    borderRadius: "12px",
-                                    border: "none",
-                                }}
-                            ></iframe>
+                            <Box
+                                position="relative"
+                                pb={{ base: "56.25%", md: "56.25%" }}
+                                h={{ base: "auto", md: "480px" }}
+                                w="100%"
+                            >
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    src={`https://www.youtube.com/embed/${ytData?.results[0]?.key}`}
+                                    title="Movie Trailer"
+                                    allowFullScreen
+                                    style={{
+                                        position: "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        borderRadius: "12px",
+                                        border: "none",
+                                    }}
+                                ></iframe>
+                            </Box>
                         </ModalBody>
                     </ModalContent>
                 </Modal>

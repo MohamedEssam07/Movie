@@ -45,7 +45,7 @@ const IntroNavbar = () => {
                 </HStack>
 
                 {/* Desktop Links */}
-                <HStack spacing={10} display={{ base: "none", md: "flex" }} color={colorMode === "light" ? "blue.500" : ""} >
+                <HStack spacing={10} display={{ base: "none", xl: "flex" }} color={colorMode === "light" ? "blue.500" : ""} >
                     <Text as={NavLink} to="/home" cursor="pointer" _hover={{ color: colorMode === "light" ? "white" : "teal.400", transition: "all 0.3s ease-in-out" }}>Home</Text>
                     <Text as={NavLink} to="/movies" cursor="pointer" _hover={{ color: colorMode === "light" ? "white" : "teal.400", transition: "all 0.3s ease-in-out" }}>Movies</Text>
                     <Text as={NavLink} to="/tv" cursor="pointer" _hover={{ color: colorMode === "light" ? "white" : "teal.400", transition: "all 0.3s ease-in-out" }}>TV Shows</Text>
@@ -54,7 +54,7 @@ const IntroNavbar = () => {
 
                 {/* Mobile Hamburger */}
                 <IconButton
-                    display={{ base: "flex", md: "none" }}
+                    display={{ base: "flex", xl: "none" }}
                     icon={<HamburgerIcon boxSize={6} />}
                     aria-label="Open Menu"
                     onClick={onOpen}

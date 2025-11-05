@@ -6,7 +6,7 @@ export default function FancyText({ title }: IProps) {
     return (
         <Text
             as="h1"
-            fontSize="6xl"
+            fontSize={{ base: "3xl", sm: "4xl", md: "5xl", lg: "6xl" }}
             fontWeight="extrabold"
             lineHeight="1"
             transform="skewX(-6deg)"

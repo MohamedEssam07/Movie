@@ -147,15 +147,14 @@ function HomePage() {
                             boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.37)"
                             border="1px solid rgba(255, 255, 255, 0.18)"
                             w="100%"
-                            maxW={{ base: "400px", md: "1450px" }}
+                            maxW={{ base: "100%", md: "1200px", lg: "1450px" }}
                             mx="auto"
-                            p={50}
+                            p={{ base: 4, md: 8, lg: 10 }}
                             borderRadius="2xl"
-
                             mb={10}
-
-                            gap={9}
-                            margin={{ md: 30 }} templateColumns={"repeat(auto-fill, minmax(300px, 1fr))"} >
+                            gap={{ base: 4, md: 6, lg: 8 }}
+                            margin={{ base: 0, md: 6 }}
+                            templateColumns={{ base: "repeat(auto-fill, minmax(160px, 1fr))", md: "repeat(auto-fill, minmax(220px, 1fr))", lg: "repeat(auto-fill, minmax(300px, 1fr))" }} >
                             {data?.results?.length ? data.results?.map((item: IProduct, idx: number) => (
 
                                 item.media_type === "tv" ?
@@ -220,14 +219,14 @@ function HomePage() {
 
 
             {/* Trending tv, movies*/}
-            <Text color={colorMode === "dark" ? "white" : "blue.500"} fontWeight={"semibold"} mb={"30px"} mt={"30px"} textAlign={{ base: "center", md: "start" }} fontSize={"4xl"} ml={{ base: "", md: "32px" }} > Trending</Text>
-            <Tabs variant={"solid-rounded"} >
-                <TabList display={"flex"} justifyContent={{ base: "space-between", md: "space-around" }} gap={{ base: "", md: "1170px" }}>
-                    <Box display={"flex"} ml={{ base: "210px", md: "10px" }}  >
+            <Text color={colorMode === "dark" ? "white" : "blue.500"} fontWeight={"semibold"} mb={{ base: "16px", md: "30px"}} mt={{ base: "16px", md: "30px"}} textAlign={{ base: "center", md: "start" }} fontSize={{ base: "2xl", md: "4xl"}} ml={{ base: 0, md: "32px" }} > Trending</Text>
+            <Tabs variant={"solid-rounded"} px={{ base: 4, md: 6 }}>
+                <TabList display={"flex"} justifyContent="space-between" alignItems="center">
+                    <Box display={"flex"} ml={0} gap={2}>
                         <Tab>Movies</Tab>
                         <Tab>Tv</Tab>
                     </Box>
-                    <Button onClick={() => nav("/trending")} rightIcon={<ArrowForwardIcon />} colorScheme="blue" variant={"link"} mr={"35px"}>See More</Button>
+                    <Button onClick={() => nav("/trending")} rightIcon={<ArrowForwardIcon />} colorScheme="blue" variant={"link"} mr={{ base: 0, md: "35px"}}>See More</Button>
                 </TabList>
                 <TabPanels>
                     <TabPanel px={0} >
