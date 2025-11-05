@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { HStack, Button, VStack } from "@chakra-ui/react";
+import { HStack, Button, VStack, useBreakpointValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 interface IProps {
@@ -17,6 +17,7 @@ interface IProps {
 
 const Paginator = ({ onClickPrev, onClickEnd, onClickPage, onClickStart, onClickNext, page, total_pages, total_results, isLoading }: IProps) => {
     //new paginator
+    const showText = useBreakpointValue({ base: false, md: true }) ?? true;
     const total = Math.min(total_pages, 500);
     const windowSize = 3
     const [currentPage, setCurrentPage] = useState(page)
@@ -40,20 +41,20 @@ const Paginator = ({ onClickPrev, onClickEnd, onClickPage, onClickStart, onClick
 
             <VStack overflowX={"hidden"} mb={"50px"}>
 
-                <HStack spacing={3} justify="center" ml={{ base: "10px", md: "60px" }} mt={6} >
+                <HStack spacing={{ base: 3, md: 3 }} justify="center" w="100%" mt={6} >
                     <Button
                         colorScheme="blue"
                         borderRadius={"full"}
-                        variant="link"
+                        variant="ghost"
                         onClick={() => {
                             onClickStart();
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
-                        display={page === 1 ? "none" : "block"}
-                        leftIcon={<ArrowLeftIcon />}
-
+                        display={page === 1 ? "none" : "flex"}
+                        aria-label="First page"
+                        size={{ base: "md", md: "md" }}
                     >
-
+                        <ArrowLeftIcon />
                     </Button>
 
                     <Button
@@ -64,9 +65,11 @@ const Paginator = ({ onClickPrev, onClickEnd, onClickPage, onClickStart, onClick
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
                         disabled={page === 1 || isLoading}
-                        leftIcon={<FaArrowLeft />}
+                        size={{ base: "md", md: "md" }}
+                        aria-label="Previous page"
+                        leftIcon={showText ? <FaArrowLeft /> : undefined}
                     >
-                        Prev
+                        {showText ? "Prev" : <ArrowLeftIcon />}
                     </Button>
 
 
@@ -74,7 +77,9 @@ const Paginator = ({ onClickPrev, onClickEnd, onClickPage, onClickStart, onClick
                     {pages.map((item) => (
                         <Button variant={"outline"}
                             borderRadius={"full"}
-                            h={"60px"}
+                            h={{ base: "48px", md: "60px" }}
+                            w={{ base: "48px", md: "60px" }}
+                            minW={{ base: "48px", md: "60px" }}
                             onClick={() => {
                                 onClickPage(item)
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -82,6 +87,7 @@ const Paginator = ({ onClickPrev, onClickEnd, onClickPage, onClickStart, onClick
                             }
                             disabled={isLoading}
                             bg={item === page ? "blue.200" : ""}
+                            fontSize={{ base: "md", md: "md" }}
 
                         >
                             {item}
@@ -97,20 +103,28 @@ const Paginator = ({ onClickPrev, onClickEnd, onClickPage, onClickStart, onClick
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
                         disabled={page === total || isLoading}
-                        rightIcon={<FaArrowRight />}
+                        size={{ base: "md", md: "md" }}
+                        aria-label="Next page"
+                        rightIcon={showText ? <FaArrowRight /> : undefined}
                     >
-                        Next
+                        {showText ? "Next" : <ArrowRightIcon />}
                     </Button>
 
 
-                    <Button colorScheme="blue" borderRadius={"full"} variant="link"
+                    <Button 
+                        colorScheme="blue" 
+                        borderRadius={"full"} 
+                        variant="ghost"
                         onClick={() => {
                             onClickEnd(total_pages)
                             window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }
-                        } display={page === total_pages ? "none" : "block"}
-                        leftIcon={<ArrowRightIcon />}
-                    > </Button>
+                        }}
+                        display={page === total_pages ? "none" : "flex"}
+                        aria-label="Last page"
+                        size={{ base: "md", md: "md" }}
+                    >
+                        <ArrowRightIcon />
+                    </Button>
                 </HStack>
             </VStack >
         </>

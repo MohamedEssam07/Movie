@@ -1,10 +1,10 @@
 // @ts-nocheck
-import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, ButtonGroup, Checkbox, HStack, Radio, RadioGroup, Stack, Text, useColorMode } from '@chakra-ui/react'
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, ButtonGroup, Checkbox, HStack, Radio, RadioGroup, Stack, Text, useColorMode, VStack } from '@chakra-ui/react'
+import { useState, type ChangeEvent, type FormEvent, useEffect } from 'react';
 import { FaFilter } from "react-icons/fa6";
 import { useAppDispatch } from '../app/store';
 import { deleteFilterItems, setFilterItems } from '../app/features/filterSlice';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 
 interface IProps {
 
@@ -71,23 +71,31 @@ const Filter = ({ }: IProps) => {
     //
     const [index, setIndex] = useState(-1)
     const nav = useNavigate()
+    const { pathname } = useLocation()
     const { colorMode } = useColorMode()
     return (
         <>
-            <Accordion transform="translateY(60px)" allowToggle index={index} border="none" borderRadius="0">
+            { /* reset local and global filter state on route change */ }
+            { /* ensures filter starts from 0 every time */ }
+            <ResetOnRoute pathname={pathname} onReset={() => {
+                setType("")
+                setYear("")
+                setGenre([])
+                disptach(deleteFilterItems())
+            }} />
+            <Box w="100%">
+            <Accordion allowToggle index={index} border="none" borderRadius="0" w="100%">
                 <AccordionItem borderRadius="0" border="none" >
 
-                    <Box
-                        _hover={{ bg: "transparent", boxShadow: "none" }}
-                        ml={{ base: "350px", md: "1400px" }}
-                    >
+                    <Box _hover={{ bg: "transparent", boxShadow: "none" }} display="flex" justifyContent="flex-end">
                         <AccordionButton
+                            w="auto"
+                            px={0}
                             _hover={{ bg: "transparent", boxShadow: "none" }} // هنا أهم حاجة
                             _focus={{ boxShadow: "none", bg: "transparent" }}
                         >
                             <Button
-
-                                ml={{ base: "2px", md: "-35px" }}
+                                ml={0}
                                 borderRadius="md"
                                 bg={colorMode === "light" ? "blue.500" : "rgba(19, 19, 19, 0.08)"}
                                 boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.37)"
@@ -114,7 +122,7 @@ const Filter = ({ }: IProps) => {
 
 
                     <AccordionPanel
-
+                        
                         pb={4}
                         borderRadius="0"
                         transition="all 0.4s ease-in-out"
@@ -133,51 +141,55 @@ const Filter = ({ }: IProps) => {
                             bg={colorMode === "dark" ? "rgba(19, 19, 19, 0.08)" : "gray.50"}
                             boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.37)"
                             border="1px solid rgba(255, 255, 255, 0.18)"
-                            as={"form"} onSubmit={onFilterHandler} p="50px" borderRadius="md" w={"97%"} mx={"auto"} ml={{ base: "", md: "15px" }}>
-                            <RadioGroup onChange={setType} value={type}>
-                                <Stack direction="row">
-                                    <Text>Type: </Text>
-                                    <HStack ml="38px">
-
-                                        <Radio value="movie">Movies</Radio>
-                                        <Radio value="tv">TV Shows</Radio>
+                            as={"form"} onSubmit={onFilterHandler}
+                            p={{ base: 5, md: 8 }}
+                            borderRadius="md"
+                            position={{ base: "static", md: "static" }}
+                            w={{ base: "100%", md: "100%" }}
+                        >
+                            <VStack align="flex-start" spacing={{ base: 3, md: 4 }} w="100%">
+                                <RadioGroup onChange={setType} value={type}>
+                                    <HStack spacing={{ base: 2, md: 4 }} align="flex-start" flexWrap="wrap">
+                                        <Text fontWeight="semibold" minW={{ base: "70px", md: "80px" }} fontSize={{ base: "sm", md: "md" }}>Type:</Text>
+                                        <HStack spacing={{ base: 3, md: 4 }} flexWrap="wrap">
+                                            <Radio value="movie" whiteSpace="nowrap">Movies</Radio>
+                                            <Radio value="tv" whiteSpace="nowrap">TV Shows</Radio>
+                                        </HStack>
                                     </HStack>
-                                </Stack>
-                            </RadioGroup>
-                            <RadioGroup>
-                                <Stack direction="row" mt="10px">
+                                </RadioGroup>
 
-                                    <RadioGroup onChange={setYear} value={year}>
-                                        <Stack direction="row" mt="10px" w={{ base: "300px", md: "full" }} flexWrap={{ base: "wrap", md: "wrap" }}>
-                                            <Text>Released: </Text>
+                                <RadioGroup onChange={setYear} value={year}>
+                                    <HStack spacing={{ base: 2, md: 4 }} align="flex-start" flexWrap="wrap">
+                                        <Text fontWeight="semibold" minW={{ base: "70px", md: "80px" }} fontSize={{ base: "sm", md: "md" }}>Released:</Text>
+                                        <HStack spacing={{ base: 2, md: 4 }} flexWrap="wrap">
                                             {years.map((y, idx) => (
-                                                <Box ml={{ base: "83px", md: "9px" }}>
-                                                    <Radio key={idx} value={y}>
-                                                        {y === "older" ? null : y}
-                                                    </Radio>
-                                                </Box>
+                                                <Radio key={idx} value={y} w="auto" whiteSpace="nowrap" fontSize={{ base: "sm", md: "md" }}>
+                                                    {y === "Older" ? "Older" : y}
+                                                </Radio>
                                             ))}
-                                        </Stack>
-                                    </RadioGroup>
+                                        </HStack>
+                                    </HStack>
+                                </RadioGroup>
 
-                                </Stack>
-                            </RadioGroup>
-
-                            <HStack spacing={7} mt="20px">
-                                <Text>Genre: </Text>
-                                <Box w="800px">
-                                    {gen.map((item) => (
-                                        <Checkbox
-                                            key={item.id}
-                                            px={"10px"}
-                                            isChecked={genre.some((g) => g.gen.id === item.id)}
-                                            onChange={(e) => handleGenreChange(e, item)}
-                                        >
-                                            {item.name}
-                                        </Checkbox>
-                                    ))}
+                                <Box w="100%">
+                                    <VStack align="flex-start" spacing={2} w="100%">
+                                        <Text fontWeight="semibold" fontSize={{ base: "sm", md: "md" }}>Genre:</Text>
+                                        <Box w="100%" display="grid" gridTemplateColumns={{ base: "repeat(1, 1fr)", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)", lg: "repeat(7, 1fr)" }} gap={{ base: 2, md: 3 }}>
+                                            {gen.map((item) => (
+                                                <Checkbox
+                                                    key={item.id}
+                                                    isChecked={genre.some((g) => g.gen.id === item.id)}
+                                                    onChange={(e) => handleGenreChange(e, item)}
+                                                    fontSize={{ base: "sm", md: "md" }}
+                                                    whiteSpace="nowrap"
+                                                >
+                                                    {item.name}
+                                                </Checkbox>
+                                            ))}
+                                        </Box>
+                                    </VStack>
                                 </Box>
-                            </HStack>
+                            </VStack>
 
                             <ButtonGroup spacing="10px" mt="20px">
                                 <Button variant="outline" colorScheme="blue" type='submit'
@@ -205,6 +217,7 @@ const Filter = ({ }: IProps) => {
                     </AccordionPanel>
                 </AccordionItem>
             </Accordion >
+            </Box>
 
 
 
@@ -214,3 +227,11 @@ const Filter = ({ }: IProps) => {
 };
 
 export default Filter;
+// helper component to trigger reset when pathname changes
+function ResetOnRoute({ pathname, onReset }: { pathname: string, onReset: () => void }) {
+    useEffect(() => {
+        onReset();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname]);
+    return null;
+}

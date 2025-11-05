@@ -9,7 +9,7 @@ import './index.css'
 const queryClient = new QueryClient()
 
 const config = {
-  initialColorMode: "light",
+  initialColorMode: "dark",
   useSystemColorMode: false,
 };
 

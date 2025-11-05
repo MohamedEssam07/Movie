@@ -3,6 +3,7 @@ import ReusableGetHook from "../hooks/ReusableGetHook";
 import MoviesSkeleton from "../ui/MoviesSkeleton";
 import Paginator from "../ui/Paginator";
 import { Box, Grid, Select, useColorModeValue } from "@chakra-ui/react";
+import Filter from "../ui/Filter";
 import TvMovie from "../components/TvMovie";
 import type { IProduct } from "../Interfaces";
 import { motion } from "framer-motion";
@@ -69,24 +70,28 @@ const Tv = ({ }: IProps) => {
         return <MoviesSkeleton />
     }
     return (
-        <Box mt={"60px"}>
-            <Select
-                w="200px"
-                ml={{ base: "42px", md: "30px" }}
-                mb={{ base: "20px" }}
-                onChange={(e: any) => {
-                    setSort(e.target.value);
-                    setPage(1);
-                }}
-                value={sort}
-            >
-                <option value="popularity.desc">Popularity (High → Low)</option>
-                <option value="popularity.asc">Popularity (Low → High)</option>
-                <option value="vote_average.desc">(High → Low) Rated</option>
-                <option value="vote_average.asc">(Low → High) Rated</option>
-                <option value="first_air_date.desc">Newest First</option>
-                <option value="first_air_date.asc">Oldest First</option>
-            </Select>
+        <Box mt={{ base: "56px", md: "60px" }} px={{ base: 4, md: 6 }} overflowX="hidden">
+            <Box maxW={{ base: "100%", md: "1200px", lg: "1450px" }} mx="auto">
+                <Box w={{ base: "100%", md: "100%" }} display="flex" justifyContent="flex-end"><Filter /></Box>
+                <Select
+                    w={{ base: "100%", sm: "280px" }}
+                    maxW="360px"
+                    ml={{ base: 0, md: 0 }}
+                    mt={{ base: 2, md: 2 }}
+                    onChange={(e: any) => {
+                        setSort(e.target.value);
+                        setPage(1);
+                    }}
+                    value={sort}
+                >
+                    <option value="popularity.desc">Popularity (High → Low)</option>
+                    <option value="popularity.asc">Popularity (Low → High)</option>
+                    <option value="vote_average.desc">(High → Low) Rated</option>
+                    <option value="vote_average.asc">(Low → High) Rated</option>
+                    <option value="first_air_date.desc">Newest First</option>
+                    <option value="first_air_date.asc">Oldest First</option>
+                </Select>
+            </Box>
 
             {sortingData?.results?.length ? (
                 <>

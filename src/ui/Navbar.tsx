@@ -99,7 +99,7 @@ const Navbar = () => {
                 {/* Center - Links */}
                 <HStack
                     spacing={8}
-                    display={{ base: "none", md: "flex" }}
+                    display={{ base: "none", xl: "flex" }}
                     position="absolute"
                     left="50%"
                     transform="translateX(-50%)"
@@ -151,7 +151,7 @@ const Navbar = () => {
                 </HStack>
 
                 {/* Right side */}
-                <HStack spacing={3} display={{ base: "none", md: "flex" }}>
+                <HStack spacing={3} display={{ base: "none", xl: "flex" }}>
                     {token ?
 
 
@@ -223,7 +223,7 @@ const Navbar = () => {
                 <IconButton
                     aria-label="Open menu"
                     icon={<HamburgerIcon />}
-                    display={{ base: "flex", md: "none" }}
+                    display={{ base: "flex", xl: "none" }}
                     onClick={onOpen}
                     color="white"
                     bg="transparent"

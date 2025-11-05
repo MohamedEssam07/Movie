@@ -16,7 +16,7 @@ export default function SearchBar() {
             <Box >
 
 
-                <FormControl display={"flex"} flexDir={"column"} gap={"50px"}  >
+                <FormControl display={"flex"} flexDir={"column"} gap={{ base: "20px", md: "32px" }}  >
                     <Input
 
 
@@ -33,8 +33,23 @@ export default function SearchBar() {
                         }}
 
 
-
-                        mx={"auto"} w={{ base: "430px", md: "1200px" }} placeholder="Search for movies or TV shows..." name='movename' bg="rgba(255,255,255,0.05)" color="white" border="1px solid" borderColor="gray.600" _placeholder={{ color: "gray.400" }} _focus={{ borderColor: "blue.400", boxShadow: "0 0 8px rgba(66,153,225,0.6)", transform: "scale(1.02)", transition: "all 0.2s ease-in-out", }} borderRadius="full" py={6} pl={10} pr={4} fontSize="lg" transition="all 0.2s ease-in-out"
+                        mx={"auto"}
+                        w={{ base: "92vw", sm: "90vw", md: "720px", lg: "960px" }}
+                        maxW={{ base: "92vw", md: "960px" }}
+                        placeholder="Search for movies or TV shows..."
+                        name='movename'
+                        bg="rgba(255,255,255,0.05)"
+                        color="white"
+                        border="1px solid"
+                        borderColor="gray.600"
+                        _placeholder={{ color: "gray.400" }}
+                        _focus={{ borderColor: "blue.400", boxShadow: "0 0 8px rgba(66,153,225,0.6)", transform: "scale(1.01)", transition: "all 0.2s ease-in-out" }}
+                        borderRadius="full"
+                        py={{ base: 4, md: 6 }}
+                        pl={6}
+                        pr={4}
+                        fontSize={{ base: "md", md: "lg" }}
+                        transition="all 0.2s ease-in-out"
                     />
 
                     <Button
@@ -50,8 +65,10 @@ export default function SearchBar() {
                         }}
                         color="white"
                         borderRadius="full"
-                        size="lg"
-                        mx={"auto"} w={"250px"} onClick={() => {
+                        size={{ base: "md", md: "lg" }}
+                        mx={"auto"}
+                        w={{ base: "60vw", sm: "220px" }}
+                        onClick={() => {
                             if (!input.trim()) return;
                             dispatch(getInput(input))
                             nav(`/search/${input}`)

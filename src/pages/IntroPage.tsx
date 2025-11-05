@@ -1,5 +1,5 @@
 
-import { Box, IconButton, InputGroup, Image, Input, InputRightElement, VStack, Button, FormControl } from "@chakra-ui/react";
+import { Box, IconButton, InputGroup, Image, Input, InputRightElement, VStack, Button, FormControl, useColorMode } from "@chakra-ui/react";
 
 import bglogo from "../assets/ana-de-armas-from-1920x1080-21932.jpg"
 import FancyText from "../ui/FancyText";
@@ -17,6 +17,7 @@ const IntroPage = ({ }: IProps) => {
     const nav = useNavigate()
     const [input, setInput] = useState("")
     const dispatch = useAppDispatch()
+    const { colorMode } = useColorMode()
 
     const onSubmitHandler = (e: FormEvent<HTMLDivElement>) => {
         e.preventDefault()
@@ -48,29 +49,31 @@ const IntroPage = ({ }: IProps) => {
             {/* content above overlay */}
             <Box position="relative" zIndex="1">
                 <IntroNavbar />
-                <VStack spacing="50px" mt="100px">
-                    <Box ml="20px">
+                <VStack spacing={{ base: "30px", md: "50px" }} mt={{ base: "40px", md: "80px", lg: "100px" }} px={{ base: 4, md: 0 }}>
+                    <Box ml={{ base: 0, md: "20px" }} textAlign={{ base: "center", md: "left" }}>
                         <Image
                             src={bLogo}
                             alt="Logo"
-                            h="150px"
-                            w="200px"
+                            h={{ base: "80px", md: "120px", lg: "150px" }}
+                            w={{ base: "100px", md: "160px", lg: "200px" }}
                             borderRadius="3xl"
                         />
                     </Box>
 
-                    <FancyText title="Kino" />
+                    <Box textAlign={{ base: "center", md: "left" }} px={{ base: 4, md: 0 }}>
+                        <FancyText title="Kino" />
+                    </Box>
 
-                    <FormControl as="form" onSubmit={onSubmitHandler}>
+                    <FormControl as="form" onSubmit={onSubmitHandler} w={{ base: "100%", md: "auto" }} px={{ base: 4, md: 0 }}>
                         <InputGroup
                             mx="auto"
-                            w={{ base: "90%", md: "955px" }}
-                            h="55px"
-                            bg="rgba(255, 255, 255, 0.1)"
+                            w={{ base: "100%", sm: "90%", md: "955px" }}
+                            h={{ base: "50px", md: "55px" }}
+                            bg={colorMode === "light" ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.1)"}
                             borderRadius="full"
                             boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
                             backdropFilter="blur(8px)"
-                            border="1px solid rgba(255, 255, 255, 0.2)"
+                            border={colorMode === "light" ? "1px solid rgba(0, 0, 0, 0.1)" : "1px solid rgba(255, 255, 255, 0.2)"}
                         >
                             <Input
                                 variant="unstyled"
@@ -78,11 +81,11 @@ const IntroPage = ({ }: IProps) => {
                                 name="movename"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
-                                px="25px"
-                                h="55px"
-                                color="white"
-                                fontSize="md"
-                                _placeholder={{ color: "gray.300" }}
+                                px={{ base: "20px", md: "25px" }}
+                                h={{ base: "50px", md: "55px" }}
+                                color={colorMode === "light" ? "gray.800" : "white"}
+                                fontSize={{ base: "sm", md: "md" }}
+                                _placeholder={{ color: colorMode === "light" ? "gray.500" : "gray.300" }}
                             />
                             <InputRightElement w="100px" h="100%">
                                 <IconButton
@@ -109,8 +112,8 @@ const IntroPage = ({ }: IProps) => {
                     </FormControl>
 
                     <Button
-                        w="200px"
-                        py="30px"
+                        w={{ base: "180px", md: "200px" }}
+                        py={{ base: "25px", md: "30px" }}
                         variant="solid"
                         bgGradient="linear(to-r, blue.400, blue.600)"
                         transition="all 0.5s ease"
@@ -121,7 +124,8 @@ const IntroPage = ({ }: IProps) => {
                         }}
                         color="white"
                         borderRadius="full"
-                        size="lg"
+                        size={{ base: "md", md: "lg" }}
+                        fontSize={{ base: "sm", md: "md" }}
                         onClick={() => nav("/home")}
                     >
                         View Full Site

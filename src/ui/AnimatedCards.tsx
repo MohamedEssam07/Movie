@@ -53,26 +53,27 @@ const AnimatedCards = ({ id }: IProps) => {
   return (
     <Box
       w="100%"
-      maxW="1400px"
+      maxW={{ base: "100%", md: "1200px", lg: "1400px" }}
       mx="auto"
-      p={5}
+      p={{ base: 3, md: 4, lg: 5 }}
+      px={{ base: 4, md: 6 }}
       borderRadius="2xl"
       bgGradient={colorMode === "light" ? "linear(to-b, white, gray.50)" : "linear(to-b, #0a0a0a, #111827, #1f2937)"}
       boxShadow="0 8px 32px 0 rgba(31, 38, 135, 0.37)"
       border="1px solid rgba(255, 255, 255, 0.18)"
       mb={10}
-
+      overflowX="hidden"
     >
 
       <Text
-        fontSize="2xl"
+        fontSize={{ base: "xl", md: "2xl" }}
         fontWeight="bold"
         bgGradient="linear(to-r, cyan.400, blue.500)"
         bgClip="text"
         textTransform="uppercase"
         letterSpacing="wide"
         textAlign="center"
-        mb={5}
+        mb={{ base: 3, md: 5 }}
       >
         Recommended for You
       </Text>
@@ -80,7 +81,7 @@ const AnimatedCards = ({ id }: IProps) => {
 
       <Swiper
         spaceBetween={20}
-        loop={true}
+        loop={recommendations.length > 5}
         autoplay={{
           delay: 2000,
           disableOnInteraction: false,
@@ -88,9 +89,9 @@ const AnimatedCards = ({ id }: IProps) => {
         modules={[Autoplay]}
         style={{ width: "100%", overflow: "hidden" }}
         breakpoints={{
-          0: { slidesPerView: 1.2, spaceBetween: 10 },
-          480: { slidesPerView: 2, spaceBetween: 15 },
-          768: { slidesPerView: 3, spaceBetween: 20 },
+          0: { slidesPerView: 1.5, spaceBetween: 10 },
+          480: { slidesPerView: 2.5, spaceBetween: 15 },
+          768: { slidesPerView: 3.5, spaceBetween: 20 },
           1024: { slidesPerView: 5, spaceBetween: 20 },
         }}
       >

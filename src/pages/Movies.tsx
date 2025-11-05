@@ -2,8 +2,9 @@
 import MoiveCard from "../components/MoiveCard";
 
 import { Box, Grid, Select, useColorModeValue } from "@chakra-ui/react";
+import Filter from "../ui/Filter";
 import Paginator from "../ui/Paginator";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 
 import ReusableGetHook from "../hooks/ReusableGetHook";
 import MoviesSkeleton from "../ui/MoviesSkeleton";
@@ -72,9 +73,11 @@ const Movies = ({ }: IProps) => {
         return <MoviesSkeleton />
     }
     return (
-        <Box mt={"60px"}>
+        <Box mt={{ base: "56px", md: "60px" }} px={{ base: 4, md: 6 }} overflowX="hidden">
 
-            <Select w="200px" ml={{ base: "42px", md: "30px" }} mb={{ base: "20px" }} onChange={(e: any) => {
+            <Box maxW={{ base: "100%", md: "1200px", lg: "1450px" }} mx="auto">
+            <Box w={{ base: "100%", md: "100%" }} display="flex" justifyContent="flex-end"><Filter /></Box>
+            <Select w={{ base: "100%", sm: "280px" }} maxW="360px" ml={{ base: 0, md: 0 }} mt={{ base: 2, md: 2 }} onChange={(e: any) => {
                 setSort(e.target.value)
                 setPage(1)
             }}>
@@ -85,25 +88,25 @@ const Movies = ({ }: IProps) => {
                 <option value="revenue.desc" selected={sort === "revenue.desc"}>Highest Profit</option>
 
             </Select>
-            {/* sort high to low */}
+            </Box>
+         
             {sortingData?.results?.length ?
                 (
-                    <>
+                    <Fragment>
                         <Grid
                             bg={bgCard}
                             boxShadow="md"
                             border="1px solid"
-
                             borderColor={borderCard}
-                            maxW={{ base: "400px", md: "1450px" }}
+                            maxW={{ base: "100%", md: "1200px", lg: "1450px" }}
                             w="100%"
                             mx="auto"
-                            p={6}
+                            p={{ base: 4, md: 6, lg: 8 }}
                             borderRadius="2xl"
                             mb={10}
                             h="fit-content"
-                            gap={6}
-                            templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
+                            gap={{ base: 4, md: 6 }}
+                            templateColumns={{ base: "repeat(auto-fill, minmax(160px, 1fr))", md: "repeat(auto-fill, minmax(220px, 1fr))", lg: "repeat(auto-fill, minmax(300px, 1fr))" }}
                         >
 
                             {sortingData?.results.length && sortingData?.results.filter((item: IProduct) => item.poster_path).map((item: IProduct, idx: number) => (
@@ -135,7 +138,7 @@ const Movies = ({ }: IProps) => {
                             :
                             null
                         }
-                    </>
+                    </Fragment>
                 )
                 :
                 <MoviesSkeleton />
