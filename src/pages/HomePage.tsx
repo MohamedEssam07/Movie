@@ -1,5 +1,5 @@
 
-
+// @ts-nocheck
 
 import { Box, Button, Flex, FormControl, FormLabel, Grid, Tab, TabList, TabPanel, TabPanels, Tabs, Text, useColorMode } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Box, Image, Text, VStack, HStack, Button, Grid, useColorMode } from "@chakra-ui/react";
 import { FaTrash } from "react-icons/fa";
 

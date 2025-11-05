@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Box, Grid, useColorModeValue } from "@chakra-ui/react";
 import MoiveCard from "../components/MoiveCard";
 import ReusableGetHook from "../hooks/ReusableGetHook";

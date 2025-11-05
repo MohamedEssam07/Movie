@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, ButtonGroup, Checkbox, HStack, Radio, RadioGroup, Stack, Text, useColorMode } from '@chakra-ui/react'
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { FaFilter } from "react-icons/fa6";

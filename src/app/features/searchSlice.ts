@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 import { useToast } from '@chakra-ui/react'

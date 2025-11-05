@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import Navbar from "../ui/Navbar";
-import Filter from "../ui/Filter";
+
 import { Box } from "@chakra-ui/react";
 
 interface IProps {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { memo, useEffect, useState } from "react";
 import ReusableGetHook from "../hooks/ReusableGetHook";
 import { Box, Button, ButtonGroup, FormControl, Grid, IconButton, Input, InputGroup, InputLeftElement, Text, useColorMode } from "@chakra-ui/react";

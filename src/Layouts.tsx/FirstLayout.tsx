@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import IntroNavbar from "../ui/IntroNavbar";
+
 
 interface IProps {
 

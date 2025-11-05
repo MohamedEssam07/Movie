@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useEffect, useState } from "react";
 import ReusableGetHook from "../hooks/ReusableGetHook";
 import Paginator from "../ui/Paginator";

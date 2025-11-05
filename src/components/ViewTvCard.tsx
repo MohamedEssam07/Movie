@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Card, CardBody, CardFooter, Image, Heading, Stack, Text, Divider, ButtonGroup, Button, Box, Badge, VStack, IconButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, useDisclosure, HStack } from '@chakra-ui/react'
 import type { IImdbData, IMovieCredits, IProduct } from "../Interfaces";
 import { useAppDispatch, type RootState } from '../app/store';

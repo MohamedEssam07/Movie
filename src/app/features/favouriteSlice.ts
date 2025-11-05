@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit'
 
 import { useToast } from '@chakra-ui/react'

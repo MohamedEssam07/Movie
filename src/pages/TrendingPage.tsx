@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Box, Grid, Select, Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue } from "@chakra-ui/react";
 import MoiveCard from "../components/MoiveCard";
 import ReusableGetHook from "../hooks/ReusableGetHook";

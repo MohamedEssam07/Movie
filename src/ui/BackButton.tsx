@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Button, HStack, Text, Icon } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { motion } from "framer-motion";

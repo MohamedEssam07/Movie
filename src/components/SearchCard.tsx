@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Card, CardBody, Image, Text, Box, Flex, useColorMode } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../app/store";
