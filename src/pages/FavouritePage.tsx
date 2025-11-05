@@ -36,7 +36,7 @@ const FavouritePage = ({ }: IProps) => {
 
 
             {items?.length ? (
-                <Box mt="80px" maxW="1200px" mx="auto" px={{ base: "4", md: "8" }}>
+                <Box mb={"50px"} mt="80px" maxW="1200px" mx="auto" px={{ base: "4", md: "8" }}>
                     {/* عنوان الصفحة + الزرار */}
                     <Flex justify="space-between" align="center" mb="10">
                         <Heading

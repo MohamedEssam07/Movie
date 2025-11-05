@@ -34,8 +34,9 @@ const links = [
     { name: "Genre", to: "/genre/12", custom: <GenreMenu /> },
     { name: "Movies", to: "/movies" },
     { name: "Trending", to: "/trending" },
-    { name: "Top IMDB", to: "/topimdb" },
     { name: "Series", to: "/tv" },
+    { name: "Top IMDB", to: "/topimdb" },
+
 ];
 const SearchNavbar = () => {
 
@@ -232,14 +233,21 @@ const SearchNavbar = () => {
 
                 {/* Mobile menu icon */}
                 <IconButton
-
-                    aria-label="Menu"
-                    icon={<HamburgerIcon />}
                     display={{ base: "flex", md: "none" }}
+                    icon={<HamburgerIcon boxSize={6} />}
+                    aria-label="Open Menu"
                     onClick={onOpen}
-                    color={colorMode === "light" ? "#63b3ed" : "white"}
-                    bg={colorMode === "dark" ? "transparent" : "blue.200"}
-                    _hover={{ bg: "whiteAlpha.200" }}
+                    bg={colorMode === "light" ? "transparent" : "transparent"}
+                    color={colorMode === "light" ? "blue.600" : "blue.500"}
+                    _hover={{
+                        bg: colorMode === "light" ? "gray.300" : "gray.600",
+                    }}
+                    _active={{
+                        bg: colorMode === "light" ? "gray.400" : "gray.500",
+                    }}
+                    p={2.5}
+                    borderRadius="lg"
+                    shadow="sm"
                 />
             </Flex>
 
@@ -291,7 +299,7 @@ const SearchNavbar = () => {
                                 <Box display="flex" flexDir={"column"} alignItems="center" gap="2">
                                     <Avatar name={user?.username} size="lg" />
                                     <Text fontWeight="medium" fontSize="lg">
-                                        👋 Hello, <Text as="span" color="blue.400">{user?.username}</Text>
+                                        👋 Hello, <Text as="span" color="blue.400" fontWeight={"bold"}>{user?.username}</Text>
                                     </Text>
                                 </Box>
                                 :
