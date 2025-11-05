@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { axiosinstance, axiosValidation } from '../../config/axios.config'
+import { axiosValidation } from '../../config/axios.config'
 
 import CookieService from '../../services/CookieService';
 import type { ILogin } from '../../Interfaces';

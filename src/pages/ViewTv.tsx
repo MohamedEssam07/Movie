@@ -1,9 +1,9 @@
-import { useLocation, useParams } from "react-router";
-import { useGetMovieDetailsQuery, useGetTvDetailsQuery } from "../app/services/apiSlice";
-import ViewMoiveCard from "../components/ViewMovieCard";
-import { Box, Text } from "@chakra-ui/react";
+import { useParams } from "react-router";
+import { useGetTvDetailsQuery } from "../app/services/apiSlice";
+
+import { Box } from "@chakra-ui/react";
 import ViewTvCard from "../components/ViewTvCard";
-import { motion } from "framer-motion";
+
 import AnimatedCards from "../ui/AnimatedCards";
 import MoviePageSkeleton from "../ui/ViewMovieTvCard";
 

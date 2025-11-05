@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import ReusableGetHook from "../hooks/ReusableGetHook";
 import Paginator from "../ui/Paginator";
-import { Box, Button, Grid, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
+import { Box, Grid, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import MoiveCard from "../components/MoiveCard";
 
 import { useParams } from "react-router";
-import SearchSkeleton from "../ui/SearchSkeleton";
+
 import MoviesSkeleton from "../ui/MoviesSkeleton";
 import TvMovie from "../components/TvMovie";
 import { motion } from "framer-motion";
-import { chakra } from "@chakra-ui/react";
+
 import type { IProduct } from "../Interfaces";
-import ScrollToTopButton from "../ui/ScrollToUpButton";
+
 interface IProps {
 
 }

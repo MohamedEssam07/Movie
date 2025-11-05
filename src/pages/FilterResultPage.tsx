@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Icon, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Grid, useColorModeValue } from "@chakra-ui/react";
 import ReusableGetHook from "../hooks/ReusableGetHook";
 import MoviesSkeleton from "../ui/MoviesSkeleton";
 import Paginator from "../ui/Paginator";

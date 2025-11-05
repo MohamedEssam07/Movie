@@ -1,5 +1,5 @@
 // SearchBar.tsx
-import { Input, Button, FormControl, FormLabel, Box } from "@chakra-ui/react";
+import { Input, Button, FormControl, Box } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getInput } from "../app/features/inputSearchSlice";

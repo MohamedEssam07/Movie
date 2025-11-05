@@ -7,10 +7,9 @@ import ReusableGetHook from '../hooks/ReusableGetHook';
 import { useNavigate, useParams } from 'react-router';
 import FancyText from '../ui/FancyText';
 import { useSelector } from 'react-redux';
-import ImageSkeleton from '../ui/Loading';
+
 import bglogo from "../assets/homesearch-bg.jpg"
-import { FaArrowLeft } from 'react-icons/fa';
-import { saveCurrMoviePage } from '../app/features/currPage';
+
 import BackButton from '../ui/BackButton';
 import WatchNowToggle from '../ui/WatchNowDropdown';
 import { useGetMovieCreditsQuery, useGetMovieImdbQuery } from '../app/services/apiSlice';
@@ -25,7 +24,7 @@ interface IProps {
     onClick?: () => void
 }
 
-const ViewMovieCard = ({ onClick, movieInfo }: IProps) => {
+const ViewMovieCard = ({ movieInfo }: IProps) => {
     const { id } = useParams()
     const { data: ytData } = ReusableGetHook({
         URL: `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
@@ -33,7 +32,7 @@ const ViewMovieCard = ({ onClick, movieInfo }: IProps) => {
     })
     const token = CookieService.get("jwt")
     const dispatch = useAppDispatch()
-    const { title, overview, poster_path, homepage, imdb_id } = movieInfo
+    const { title, overview, poster_path, homepage } = movieInfo
     const { isOpen, onOpen, onClose } = useDisclosure();
     const favourites = useSelector((state: RootState) => state.favourite.items);
     const isFavourite = favourites.some((item) => item.id === movieInfo.id);

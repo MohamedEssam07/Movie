@@ -18,8 +18,8 @@ interface IProps {
     name: string;
     vote_average: number;
 }
-const TvCard = ({ type, vote_average, children, movieType, maxW, onClick, movieInfo }: IProps) => {
-    const { title, overview, poster_path, rating, release_date, name, id } = movieInfo
+const TvCard = ({ type, vote_average, onClick, movieInfo }: IProps) => {
+    const { title, poster_path, release_date, id } = movieInfo
     const nav = useNavigate()
     const dispatch = useAppDispatch()
     const { items } = useSelector((state: RootState) => state.favourite)

@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import ReusableGetHook from "../hooks/ReusableGetHook";
 import { useEffect, useState } from "react";
 import { Box, Grid, Text, useColorModeValue } from "@chakra-ui/react";
@@ -15,7 +15,7 @@ interface IProps {
 const HomeSearchResult = ({ }: IProps) => {
     const bgCard = useColorModeValue("gray.50", "gray.800"); // light background
     const borderCard = useColorModeValue("gray.200", "gray.700"); // light border
-    const nav = useNavigate()
+
     const { input } = useParams()
     const MotionBox = motion(Box);
     if (!input) {

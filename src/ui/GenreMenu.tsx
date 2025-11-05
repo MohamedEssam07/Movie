@@ -1,6 +1,6 @@
 import {
     Box,
-    Flex,
+
     Menu,
     MenuButton,
     MenuList,
@@ -8,16 +8,16 @@ import {
     Text,
     useBreakpointValue,
     IconButton,
-    HStack,
+
     useColorMode,
     Icon,
 } from "@chakra-ui/react";
-import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
-import { memo, useCallback, useState } from "react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { Tags } from "lucide-react"
-import { MdCategory } from "react-icons/md";
+
 const genres = [
 
     { id: 12, name: "Adventure" },

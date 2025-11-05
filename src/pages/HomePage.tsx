@@ -31,7 +31,7 @@ import type { RootState } from '../app/store';
 function HomePage() {
     const input = useSelector((state: RootState) => state.inputt)
 
-    const [triggerSearch, setTriggerSearch] = useState(false);
+
     const MotionBox = motion(Box);
     const [tempId, seTempId] = useState(1)
     const nav = useNavigate()
@@ -42,7 +42,7 @@ function HomePage() {
     });
 
     //search by button
-    const { data, isLoading, isFetching, error, refetch } = ReusableGetHook({
+    const { data, isLoading, isFetching } = ReusableGetHook({
         queryKey: ["movie", page],
         URL: `/search/multi?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${input}&page=${page}`,
         enabled: false
@@ -53,19 +53,19 @@ function HomePage() {
 
     //After Search
     //now playing Movies
-    const { data: latestMovies, isLoading: latestMoviesLoading } = ReusableGetHook({ URL: `${import.meta.env.VITE_SERVER_URL}/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_API_KEY}&include_adult=false&certification_country=US&certification.lte=PG-13`, queryKey: ["latestmovies"] })
+    const { data: latestMovies } = ReusableGetHook({ URL: `${import.meta.env.VITE_SERVER_URL}/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_API_KEY}&include_adult=false&certification_country=US&certification.lte=PG-13`, queryKey: ["latestmovies"] })
     //on the air Tv
-    const { data: latestTv, isLoading: latestTvLoading } = ReusableGetHook({ URL: `${import.meta.env.VITE_SERVER_URL}/tv/on_the_air?api_key=${import.meta.env.VITE_TMDB_API_KEY}&include_adult=false&certification_country=US&certification.lte=PG-13`, queryKey: ["latesttv"] })
+    const { data: latestTv } = ReusableGetHook({ URL: `${import.meta.env.VITE_SERVER_URL}/tv/on_the_air?api_key=${import.meta.env.VITE_TMDB_API_KEY}&include_adult=false&certification_country=US&certification.lte=PG-13`, queryKey: ["latesttv"] })
     //trending movie
-    const { data: trendingMovie, isLoading: trendingMovieLoading } = ReusableGetHook({
+    const { data: trendingMovie } = ReusableGetHook({
         URL: `${import.meta.env.VITE_SERVER_URL}/trending/movie/week?api_key=${import.meta.env.VITE_TMDB_API_KEY}&include_adult=false&certification_country=US&certification.lte=PG-13`, queryKey: ["trendingmovie"]
     })
     //trending tv
-    const { data: trendingTv, isLoading: trendingTvLoading } = ReusableGetHook({
+    const { data: trendingTv } = ReusableGetHook({
         URL: `${import.meta.env.VITE_SERVER_URL}/trending/tv/week?api_key=${import.meta.env.VITE_TMDB_API_KEY}&include_adult=false&certification_country=US&certification.lte=PG-13`, queryKey: ["trendingtv"]
     })
     // comming soon
-    const { data: comingSoonData, isLoading: comingSoonDataLoading } = ReusableGetHook({ URL: `${import.meta.env.VITE_SERVER_URL}/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_API_KEY}&include_adult=false&certification_country=US&certification.lte=PG-13`, queryKey: ["comingsoon"] })
+    const { data: comingSoonData } = ReusableGetHook({ URL: `${import.meta.env.VITE_SERVER_URL}/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_API_KEY}&include_adult=false&certification_country=US&certification.lte=PG-13`, queryKey: ["comingsoon"] })
 
 
     //functios

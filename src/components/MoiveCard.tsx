@@ -1,4 +1,4 @@
-import { Card, CardBody, CardFooter, Image, Heading, Stack, Text, Divider, ButtonGroup, Button, Box, Badge, Tooltip, useColorMode } from '@chakra-ui/react'
+import { Card, CardBody, Image, Heading, Stack, Text, ButtonGroup, Button, Box, Badge, Tooltip, useColorMode } from '@chakra-ui/react'
 import type { IProduct } from "../Interfaces";
 import { useNavigate } from 'react-router';
 import { useAppDispatch, type RootState } from '../app/store';
@@ -18,9 +18,9 @@ interface IProps {
     type?: string;
     vote_average: number;
 }
-const MoiveCard = ({ type, children, movieType, maxW, onClick, movieInfo }: IProps) => {
+const MoiveCard = ({ type, onClick, movieInfo }: IProps) => {
     const { colorMode } = useColorMode()
-    const { title, overview, poster_path, vote_average, release_date, id } = movieInfo
+    const { title, poster_path, vote_average, release_date, id } = movieInfo
     const nav = useNavigate()
     const dispatch = useAppDispatch()
     const token = CookieService.get("jwt")

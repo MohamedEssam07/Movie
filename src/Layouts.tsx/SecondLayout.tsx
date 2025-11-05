@@ -1,11 +1,11 @@
 import { Outlet, useLocation } from "react-router";
-import Navbar from "../ui/Navbar";
+
 import Filter from "../ui/Filter";
 import { Box, useBreakpointValue } from "@chakra-ui/react";
-import AutoSearch from "../ui/AutoSearch";
+
 import SearchNavbar from "../ui/SearchNavbar";
 import ScrollToTopButton from "../ui/ScrollToUpButton";
-import { useEffect } from "react";
+
 
 interface IProps {
 

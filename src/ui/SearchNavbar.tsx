@@ -6,7 +6,7 @@ import {
     Button,
     IconButton,
     useColorMode,
-    useColorModeValue,
+
     Image,
 
     DrawerBody,
@@ -20,16 +20,14 @@ import {
     Avatar,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Link, NavLink, Link as RouterLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import GenreMenu from "./GenreMenu";
-import logo from "../assets/unnamed.jpg";
+
 import { useEffect, useState } from "react";
 import AutoSearch from "./AutoSearch";
 import bLogo from "../assets/BLogo.svg"
 import CookieService from "../services/CookieService";
-import { useSelector } from "react-redux";
-import type { RootState } from "../app/store";
-import ProfileModal from "./ProfileModal";
+
 import ProfileMenu from "./ProfileModal";
 const links = [
     { name: "Home", to: "/home" },

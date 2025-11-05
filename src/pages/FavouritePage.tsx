@@ -1,10 +1,10 @@
-import { Box, Image, Button, Grid, Heading, Flex, useColorMode, Text } from "@chakra-ui/react";
+import { Box, Button, Grid, Heading, Flex, useColorMode } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { useAppDispatch, type RootState } from "../app/store";
 
 import FavouriteCard from "../components/FavouriteCard";
 import { removeAllFavourite } from "../app/features/favouriteSlice";
-import myImage from "../assets/9214814.jpg";
+
 
 import type { IProduct } from "../Interfaces";
 import CookieService from "../services/CookieService";

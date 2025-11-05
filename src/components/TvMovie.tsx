@@ -1,3 +1,4 @@
+
 import { Card, CardBody, Image, Heading, Stack, Text, Badge, ButtonGroup, Button, Box, Tooltip, useColorModeValue, useColorMode } from '@chakra-ui/react';
 import type { IProduct } from "../Interfaces";
 import { useNavigate } from 'react-router';
@@ -15,8 +16,8 @@ interface IProps {
     vote_average: number;
 }
 
-const TvMovie = ({ children, type: type, maxW, onClick, movieInfo }: IProps) => {
-    const { name, overview, poster_path, vote_average, first_air_date, rating, release_date, id } = movieInfo || {}
+const TvMovie = ({ type: type, onClick, movieInfo }: IProps) => {
+    const { name, poster_path, vote_average, first_air_date, id } = movieInfo || {}
     const nav = useNavigate()
     const dispatch = useAppDispatch()
     const token = CookieService.get("jwt")
@@ -26,8 +27,7 @@ const TvMovie = ({ children, type: type, maxW, onClick, movieInfo }: IProps) => 
     // Chakra color mode values
     const bgCard = useColorModeValue("white", "gray.800");
     const overlayBg = useColorModeValue("blackAlpha.300", "blackAlpha.700");
-    const textColor = useColorModeValue("gray.800", "white");
-    const favColor = useColorModeValue("gray.800", "white");
+
     const { colorMode } = useColorMode()
     return (
         <>

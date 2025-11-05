@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import Paginator from "../ui/Paginator";
 import type { IProduct } from "../Interfaces";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import type { RootState } from "../app/store";
+
 import MoviesSkeleton from "../ui/MoviesSkeleton";
 
 interface IProps {
@@ -16,7 +15,7 @@ interface IProps {
 const TopImdbPage = ({ }: IProps) => {
     const bgCard = useColorModeValue("gray.300", "gray.800"); // light background
     const borderCard = useColorModeValue("gray.200", "gray.700"); // light border
-    const { currMoviePage } = useSelector((state: RootState) => state.currPage)
+
     const MotionBox = motion(Box);
     const [page, setPage] = useState(() => {
         // لو في page محفوظ في الجلسة، استخدمه

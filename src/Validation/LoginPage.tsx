@@ -1,18 +1,18 @@
-import { Box, Button, FormControl, FormHelperText, FormLabel, IconButton, InputGroup, InputRightElement, List, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
+import { Box, Button, FormLabel, IconButton, InputGroup, InputRightElement, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import CustomInput from "./Input";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, registerSchema, type loginFormData, type registerFormData } from "./ValidationSchema";
 import { loginList, registerList, type ILoginList, type IRegisterList } from "./List";
 import ErrorMsg from "./ErrorMsg";
 import FancyText from "../ui/FancyText";
-import ReusableGetHook from "../hooks/ReusableGetHook";
+
 import { useAppDispatch, type RootState } from "../app/store";
 import { userLogin } from "../app/features/LoginSlice";
 import { userRegister } from "../app/features/SignupSlice";
 import { useSelector } from "react-redux";
-import { Navigate, replace, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import bglogo from "../assets/black-rocks-dark-1920x1080-13127.jpg"
 import CookieService from "../services/CookieService";
@@ -23,8 +23,8 @@ const LoginPage = ({ }: IProps) => {
     const nav = useNavigate()
     const dispatch = useAppDispatch()
     const [showPassword, setShowPassword] = useState(false);
-    const { data: respRegisterData, error, loading } = useSelector((state: RootState) => state.register)
-    const { data: loginData, error: loginError, loading: loginLoading } = useSelector((state: RootState) => state.login)
+    const { data: respRegisterData, loading } = useSelector((state: RootState) => state.register)
+    const { loading: loginLoading } = useSelector((state: RootState) => state.login)
     console.log(respRegisterData)
     const token = CookieService.get("jwt")
     const [tabIndex, setTabIndex] = useState(0)

@@ -1,4 +1,4 @@
-import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, ButtonGroup, Checkbox, Collapse, Fade, HStack, Radio, RadioGroup, Stack, Text, useColorMode, useDisclosure } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, ButtonGroup, Checkbox, HStack, Radio, RadioGroup, Stack, Text, useColorMode } from '@chakra-ui/react'
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { FaFilter } from "react-icons/fa6";
 import { useAppDispatch } from '../app/store';
@@ -12,7 +12,7 @@ interface IGen {
     gen: { name: string, id: number }
 }
 const Filter = ({ }: IProps) => {
-    const [value, setValue] = useState('1')
+
 
     const gen = [
         { name: "Action", id: 28 },
