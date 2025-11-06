@@ -131,7 +131,7 @@ const GenreMovies = ({ }: IProps) => {
 
 
     return (
-        <Box mt={{ base: "56px", md: "80px" }} px={{ base: 4, md: 6 }} overflowX="hidden">
+        <Box mt={{ base: "56px", md: "80px" }}  px={{ base: 4, md: 6 }} overflowX="hidden">
 
             <Tabs
                 isFitted
@@ -142,7 +142,6 @@ const GenreMovies = ({ }: IProps) => {
 
                     const savedInd = Number(sessionStorage.getItem("genreTab"));
 
-                    // لو التاب فعلاً اتغير مش نفس القديم (يعني مش مجرد mount)
                     if (e !== savedInd) {
                         if (e === 0) setMoviePage(1);
                         if (e === 1) setTvPage(1);

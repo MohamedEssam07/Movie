@@ -55,6 +55,7 @@ const GenreMenu = () => {
                     onClick={() => setIsOpen(!isOpen)}
                     variant="ghost"
                     bg="gray.700"
+                    
                     _hover={{
                         bg: "gray.600",
                         transform: "scale(1.06)",
@@ -75,6 +76,7 @@ const GenreMenu = () => {
                     display="flex"
                     alignItems="center"
                     gap={1}
+                    
 
 
 
@@ -88,6 +90,8 @@ const GenreMenu = () => {
                 mt="-2"
                 onMouseEnter={() => !isMobile && setIsOpen(true)}
                 onMouseLeave={() => !isMobile && setIsOpen(false)}
+                
+                
                 onClick={() => setIsOpen(false)}
                 p={{ base: 3, md: 4 }}
                 minW={{ base: "280px", md: "600px" }}
@@ -108,6 +112,7 @@ const GenreMenu = () => {
                                 color={colorMode === "dark" ? "blue.500" : "blue.900"}
                                 _hover={{ color: "blue.500" }}
                                 display="block"
+                                
                                 p={1}
                             >
                                 {genre.name}

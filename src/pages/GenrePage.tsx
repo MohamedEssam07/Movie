@@ -13,9 +13,9 @@ const GenrePage = ({ }: IProps) => {
                 w="100%"
                 justifyContent="center"
                 position="relative"
-                zIndex={9999}
+               
             >
-                <Box position="fixed" top="20px" left="50%" transform="translateX(-50%)" zIndex={99999}>
+                <Box position="absolute" top="20px" left="50%" zIndex={999} transform="translateX(-50%)" >
                     <GenreMenu />
                 </Box>
             </Flex>
