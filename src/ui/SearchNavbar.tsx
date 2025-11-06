@@ -20,7 +20,7 @@ import {
     Avatar,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Link, NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import GenreMenu from "./GenreMenu";
 
 import { useEffect, useState } from "react";
@@ -33,8 +33,8 @@ const links = [
     { name: "Home", to: "/home" },
     { name: "Genre", to: "/genre/12", custom: <GenreMenu /> },
     { name: "Movies", to: "/movies" },
+    { name: "TV Shows", to: "/tv" },
     { name: "Trending", to: "/trending" },
-    { name: "Series", to: "/tv" },
     { name: "Top IMDB", to: "/topimdb" },
 
 ];
@@ -57,16 +57,18 @@ const SearchNavbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const location = useLocation();
 
+    const isGenrePage = location.pathname.startsWith("/genre");
 
     return (
 
         <Box
-
+        
             position="fixed"
             top="0"
             w="100%"
-            zIndex="1000"
+            zIndex={isGenrePage ? (isOpen || scrolled ? 1000 : 0) : (1000)}
             transition="0.3s"
             backdropFilter={scrolled ? "blur(10px)" : "none"}
             bg="transparent"
@@ -74,13 +76,14 @@ const SearchNavbar = () => {
 
         >
             <Flex
-
+        
                 maxW="1200px"
                 mx="auto"
                 py={3}
                 px={6}
                 justify="space-between"
                 align="center"
+                
             >
                 {/* Logo */}
                 <HStack spacing={2}>
@@ -252,7 +255,7 @@ const SearchNavbar = () => {
             </Flex>
 
             {/* Drawer for mobile */}
-            <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
+            <Drawer placement="right"  onClose={onClose} isOpen={isOpen} >
                 <DrawerOverlay backdropFilter="blur(3px)" />
                 <DrawerContent
 
@@ -296,30 +299,14 @@ const SearchNavbar = () => {
 
 
                             {token ?
+                            <>
                                 <Box display="flex" flexDir={"column"} alignItems="center" gap="2">
                                     <Avatar name={user?.username} size="lg" />
                                     <Text fontWeight="medium" fontSize="lg">
                                         👋 Hello, <Text as="span" color="blue.400" fontWeight={"bold"}>{user?.username}</Text>
                                     </Text>
                                 </Box>
-                                :
                                 <Button
-                                    bgGradient="linear(to-r, blue.400, blue.600)"
-                                    _hover={{
-                                        bgGradient: "linear(to-r, blue.500, blue.700)",
-                                        transform: "scale(1.05)",
-                                    }}
-                                    variant="solid"
-                                    size="sm"
-                                    borderRadius="md"
-
-                                >
-                                    Login
-                                </Button>
-                            }
-
-
-                            <Button
                                 onClick={() => {
                                     nav("/favourites");
                                     onClose();
@@ -362,6 +349,25 @@ const SearchNavbar = () => {
                             >
                                 Logout
                             </Button>
+                                </>
+                                :
+                                <Button
+                                    bgGradient="linear(to-r, blue.400, blue.600)"
+                                    _hover={{
+                                        bgGradient: "linear(to-r, blue.500, blue.700)",
+                                        transform: "scale(1.05)",
+                                    }}
+                                    variant="solid"
+                                    size="sm"
+                                    borderRadius="md"
+                                    onClick={() => nav("/login")}
+                                >
+                                    Login
+                                </Button>
+                            }
+
+
+                          
 
 
                             <IconButton

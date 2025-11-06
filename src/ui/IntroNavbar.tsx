@@ -25,7 +25,7 @@ import CookieService from "../services/CookieService";
 const links = [
     { name: "Home", to: "/home" },
     { name: "Movies", to: "/movies" },
-    { name: "Series", to: "/tv" },
+    { name: "TV Shows", to: "/tv" },
     { name: "Top IMDB", to: "/topimdb" },
 ];
 const IntroNavbar = () => {
@@ -74,8 +74,9 @@ const IntroNavbar = () => {
 
             {/* Drawer for Mobile */}
             <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-                <DrawerOverlay />
+                <DrawerOverlay zIndex={1400} />
                 <DrawerContent
+                    zIndex={1401}
                     bg="rgba(15, 15, 20, 0.65)"
                     backdropFilter="blur(10px) saturate(180%)"
 
@@ -109,29 +110,13 @@ const IntroNavbar = () => {
 
 
                             {token ?
+                            <>
                                 <Box display="flex" flexDir={"column"} alignItems="center" gap="2">
                                     <Avatar name={user?.username} size="lg" />
                                     <Text fontWeight="medium" fontSize="lg">👋 Hello, <Text as="span" color="blue.400" fontWeight={"bold"}>{user?.username}</Text>
                                     </Text>
                                 </Box>
-                                :
                                 <Button
-                                    bgGradient="linear(to-r, blue.400, blue.600)"
-                                    _hover={{
-                                        bgGradient: "linear(to-r, blue.500, blue.700)",
-                                        transform: "scale(1.05)",
-                                    }}
-                                    variant="solid"
-                                    size="sm"
-                                    borderRadius="md"
-
-                                >
-                                    Login
-                                </Button>
-                            }
-
-
-                            <Button
                                 onClick={() => {
                                     nav("/favourites");
                                     onClose();
@@ -174,6 +159,25 @@ const IntroNavbar = () => {
                             >
                                 Logout
                             </Button>
+                                </>
+                                :
+                                <Button
+                                    bgGradient="linear(to-r, blue.400, blue.600)"
+                                    _hover={{
+                                        bgGradient: "linear(to-r, blue.500, blue.700)",
+                                        transform: "scale(1.05)",
+                                    }}
+                                    variant="solid"
+                                    size="sm"
+                                    borderRadius="md"
+                                    onClick={() => nav("/login")}
+                                >
+                                    Login
+                                </Button>
+                            }
+
+
+                           
 
 
                             <IconButton

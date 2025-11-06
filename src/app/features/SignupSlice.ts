@@ -41,8 +41,8 @@ export const registerSlice = createSlice({
             }
             )
             .addCase(userRegister.fulfilled, (state, action) => {
-                state.loading = false,
-                    state.data = action.payload
+                state.loading = false;
+                state.data = action.payload
                 const date = new Date()
                 const IN_DAYS = 3
                 const EXPIRES_IN_DAYS = 1000 * 60 * 60 * 24 * IN_DAYS
@@ -63,8 +63,8 @@ export const registerSlice = createSlice({
 
             })
             .addCase(userRegister.rejected, (state, action) => {
-                state.loading = false,
-                    state.error = action.payload ?? "uknownError"
+                state.loading = false;
+                state.error = action.payload ?? "uknownError"
                 console.log("actionpaylod : ", action.payload)
                 toast({
                     title: `${action?.payload}`,

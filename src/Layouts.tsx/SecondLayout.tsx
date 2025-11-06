@@ -23,7 +23,7 @@ const SecondLayout = ({ }: IProps) => {
             <SearchNavbar />
             {/* Filter moved into individual pages to sit beside the sort Select */}
             <Box>
-                <ScrollToTopButton windowScrollY={windowScrollY} top={20} bottom={0} right={"5px"} />
+                <ScrollToTopButton windowScrollY={windowScrollY} top={0} bottom={0} right={"5px"} />
             </Box>
             <Outlet />
         </Box>

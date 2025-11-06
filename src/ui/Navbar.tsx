@@ -33,9 +33,10 @@ const links = [
     { name: "Home", to: "/home" },
     { name: "Genre", to: "/genre/12", custom: <GenreMenu /> },
     { name: "Movies", to: "/movies" },
+    { name: "TV Shows", to: "/tv" },
     { name: "Trending", to: "/trending" },
     { name: "Top IMDB", to: "/topimdb" },
-    { name: "Series", to: "/tv" },
+    
 ];
 const Navbar = () => {
     const token = CookieService.get("jwt")
@@ -107,7 +108,7 @@ const Navbar = () => {
                     {links.map((item) =>
                         item.custom ? (
                             <Box key={item.name} color="whiteAlpha.900" fontWeight="medium">
-                                {item.custom}
+                                {item.name === "Genre" ? <GenreMenu drawerIsOpen={isOpen} /> : item.custom}
                             </Box>
                         ) : (
                             <NavLink
@@ -272,36 +273,21 @@ const Navbar = () => {
                                 </NavLink>
                             ))}
                             {token ?
+                            <>
                                 <Box display="flex" flexDir={"column"} alignItems="center" gap="2">
                                     <Avatar name={user?.username} size="lg" />
                                     <Text fontWeight="medium" fontSize="lg">
                                         👋 Hello, <Text as="span" color="blue.400">{user?.username}</Text>
                                     </Text>
                                 </Box>
-                                :
                                 <Button
-                                    bgGradient="linear(to-r, blue.400, blue.600)"
-                                    _hover={{
-                                        bgGradient: "linear(to-r, blue.500, blue.700)",
-                                        transform: "scale(1.05)",
-                                    }}
-                                    variant="solid"
-                                    size="sm"
-                                    borderRadius="md"
-
-                                >
-                                    Login
-                                </Button>
-                            }
-
-                            <Button
                                 onClick={() => {
                                     nav("/favourites");
                                     onClose();
                                 }}
                                 variant="outline"
                                 borderColor="cyan.400"
-                                color="cyan.300"
+                                color="#63b3ed"
                                 size="sm"
                                 borderRadius="md"
                                 py={"20px"}
@@ -337,6 +323,25 @@ const Navbar = () => {
                             >
                                 Logout
                             </Button>
+                                </>
+                                :
+                                <Button
+                                    bgGradient="linear(to-r, blue.400, blue.600)"
+                                    _hover={{
+                                        bgGradient: "linear(to-r, blue.500, blue.700)",
+                                        transform: "scale(1.05)",
+                                    }}
+                                    
+                                    variant="solid"
+                                    size="sm"
+                                    borderRadius="md"
+                                    onClick={() => nav("/login")}
+                                >
+                                    Login
+                                </Button>
+                            }
+
+                         
 
                             <IconButton
                                 aria-label="Toggle color mode"
