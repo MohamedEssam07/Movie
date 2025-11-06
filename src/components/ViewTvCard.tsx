@@ -155,7 +155,11 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
                                     />
                                 </Tooltip>
                             </Flex>
-                            <HStack spacing={{ base: 4, md: 7 }} flexWrap={{ base: "wrap", md: "nowrap" }} justifyContent={{ base: "center", md: "flex-start" }}>
+                            <HStack
+                                spacing={{ base: 4, md: 7 }}
+                                flexWrap={{ base: "wrap", lg: "nowrap" }}
+                                justifyContent={{ base: "center", lg: "flex-start" }}
+                            >
                                 {TvCredits?.cast.slice(0, 3).map((item: IMovieCredits, idx: number) => (
                                     <VStack
                                         key={idx}

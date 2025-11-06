@@ -96,16 +96,16 @@ function HomePage() {
         return <HomeSkeleton />
     }
     return (
-        <>
+        <Box overflowX="hidden" overflowY="hidden">
 
-            {/* navbar search */}
+            
 
             {/*search */}
             {isLoading ?
                 (<MoviesSkeleton />)
                 :
                 (
-                    <Box as="form" position="relative" w="100%" h="100vh" overflow="hidden">
+                    <Box as="form" position="relative" w="100%" h="100vh" overflowY="hidden">
                         <video
                             autoPlay
                             loop
@@ -219,14 +219,41 @@ function HomePage() {
 
 
             {/* Trending tv, movies*/}
-            <Text color={colorMode === "dark" ? "white" : "blue.500"} fontWeight={"semibold"} mb={{ base: "16px", md: "30px"}} mt={{ base: "16px", md: "30px"}} textAlign={{ base: "center", md: "start" }} fontSize={{ base: "2xl", md: "4xl"}} ml={{ base: 0, md: "32px" }} > Trending</Text>
-            <Tabs variant={"solid-rounded"} px={{ base: 4, md: 6 }}>
-                <TabList display={"flex"} justifyContent="space-between" alignItems="center">
+            <Flex
+                flexDir={{ base: "column", md: "row" }}
+                alignItems="center"
+                justifyContent="space-between"
+                px={{ base: "20px", md: "30px" }}
+                mt="30px"
+                mb="30px"
+            >
+                <Text
+                    fontWeight="semibold"
+                    fontSize="4xl"
+                    color={colorMode === "dark" ? "white" : "blue.500"}
+                    textAlign={{ base: "center", md: "start" }}
+                    whiteSpace="nowrap"
+                >
+                    Trending
+                </Text>
+
+                <Button
+                    w="150px"
+                    mt={{ base: "10px", md: "0" }}
+                    onClick={() => nav("/trending")}
+                    rightIcon={<ArrowForwardIcon />}
+                    colorScheme="blue"
+                    variant="link"
+                >
+                    See More
+                </Button>
+            </Flex>
+            <Tabs variant={"solid-rounded"} px={{ base: 4, md: 0 }}>
+                <TabList display={"flex"} justifyContent={{ base: "center", md: "flex-start" }} alignItems="center" pl={{ base: 0, md: "30px" }}>
                     <Box display={"flex"} ml={0} gap={2}>
                         <Tab>Movies</Tab>
                         <Tab>Tv</Tab>
                     </Box>
-                    <Button onClick={() => nav("/trending")} rightIcon={<ArrowForwardIcon />} colorScheme="blue" variant={"link"} mr={{ base: 0, md: "35px"}}>See More</Button>
                 </TabList>
                 <TabPanels>
                     <TabPanel px={0} >
@@ -374,7 +401,7 @@ function HomePage() {
             </Grid>
             <ScrollToTopButton windowScrollY={4000} />
 
-        </>
+        </Box>
     )
 }
 
