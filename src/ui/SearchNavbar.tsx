@@ -68,7 +68,7 @@ const SearchNavbar = () => {
             position="fixed"
             top="0"
             w="100%"
-            zIndex={isGenrePage ? (isOpen || scrolled ? 1000 : 0) : (1000)}
+            zIndex={{base:isGenrePage ? (isOpen || scrolled ? 1000 : 0) : (1000), md:1000}}
             transition="0.3s"
             backdropFilter={scrolled ? "blur(10px)" : "none"}
             bg="transparent"

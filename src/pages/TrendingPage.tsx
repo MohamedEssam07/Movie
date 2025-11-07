@@ -16,6 +16,7 @@ const TrendingPage = ({ }: IProps) => {
     const bgCard = useColorModeValue("gray.50", "gray.800"); // light background
     const borderCard = useColorModeValue("gray.200", "gray.700"); // light border
     const MotionBox = motion(Box);
+    const blockedIds = [381318  , 349578, 192396 , 171203 , 1242011 , 63315];
     const [moviePage, setMoviePage] = useState(() => {
         const saved = sessionStorage.getItem("trending_movie_page");
         return saved ? Number(saved) : 1;
@@ -143,7 +144,7 @@ const TrendingPage = ({ }: IProps) => {
                             gap={6}
                             templateColumns={{ base: "repeat(auto-fit, minmax(200px, 1fr))", md: "repeat(auto-fit, minmax(300px, 1fr))" }}
                         >
-                            {data?.results.length && data?.results?.filter((item: IProduct) => item.poster_path).map((movie: IProduct, idx: number) => (
+                            {data?.results.length && data?.results?.filter((item: IProduct) => item.poster_path  && !blockedIds.includes(item.id) ).map((movie: IProduct, idx: number) => (
                                 <MotionBox key={movie.id}
                                     initial={{ opacity: 0, y: 50 }}
                                     whileInView={{ opacity: 1, y: 0 }}

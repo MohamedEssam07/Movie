@@ -109,7 +109,7 @@ const Movies = ({ }: IProps) => {
                             templateColumns={{ base: "repeat(auto-fill, minmax(160px, 1fr))", md: "repeat(auto-fill, minmax(220px, 1fr))", lg: "repeat(auto-fill, minmax(300px, 1fr))" }}
                         >
 
-                            {sortingData?.results.length && sortingData?.results.filter((item: IProduct) => item.poster_path).map((item: IProduct, idx: number) => (
+                            {sortingData?.results.length && sortingData?.results.filter((item: IProduct) => item.poster_path && item.id !== 349578).map((item: IProduct, idx: number) => (
                                 <MotionBox key={sortingData.id}
                                     initial={{ opacity: 0, y: 50 }}
                                     whileInView={{ opacity: 1, y: 0 }}
