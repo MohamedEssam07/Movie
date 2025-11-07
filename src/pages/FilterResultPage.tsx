@@ -17,6 +17,7 @@ import NoData from "../ui/NoData";
 
 
 const FilterResultPage = () => {
+    
     const bgCard = useColorModeValue("gray.50", "gray.800"); // light background
     const borderCard = useColorModeValue("gray.200", "gray.700"); // light border
     const MotionBox = motion(Box);
@@ -98,7 +99,7 @@ const FilterResultPage = () => {
                             templateColumns={{ base: "repeat(auto-fit, minmax(200px, 1fr))", md: "repeat(auto-fit, minmax(300px, 1fr))" }}
                         >
                             {data?.results.length &&
-                                data?.results?.filter((it: IProduct) => it.poster_path).map((item: IProduct, idx: number) => (
+                                data?.results?.filter((it: IProduct) => it.poster_path && it.id !== 288577 && it.id !== 276880).map((item: IProduct, idx: number) => (
                                     item.title ? (
                                         <MotionBox key={item.id}
                                             initial={{ opacity: 0, y: 50 }}

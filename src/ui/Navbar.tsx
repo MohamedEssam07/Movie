@@ -6,9 +6,7 @@ import {
     Button,
     IconButton,
     useColorMode,
-
     Image,
-
     useDisclosure,
     Drawer,
     DrawerOverlay,
@@ -38,6 +36,7 @@ const links = [
     { name: "Top IMDB", to: "/topimdb" },
     
 ];
+
 const Navbar = () => {
     const token = CookieService.get("jwt")
     const user = CookieService.get("user")
@@ -108,7 +107,7 @@ const Navbar = () => {
                     {links.map((item) =>
                         item.custom ? (
                             <Box key={item.name} color="whiteAlpha.900" fontWeight="medium">
-                                {item.name === "Genre" ? <GenreMenu drawerIsOpen={isOpen} /> : item.custom}
+                                {item.name === "Genre" ? <GenreMenu  /> : item.custom}
                             </Box>
                         ) : (
                             <NavLink

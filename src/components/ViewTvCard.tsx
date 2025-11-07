@@ -8,8 +8,6 @@ import ReusableGetHook from '../hooks/ReusableGetHook';
 import { useNavigate, useParams } from 'react-router';
 import FancyText from '../ui/FancyText';
 import { useSelector } from 'react-redux';
-
-import bglogo from "../assets/homesearch-bg.jpg"
 import { FaArrowLeft } from 'react-icons/fa6';
 import BackButton from '../ui/BackButton';
 import { useGetTvCreditsQuery, useGetTvImdbQuery } from '../app/services/apiSlice';
@@ -63,7 +61,7 @@ const ViewTvCard = ({ onClick, movieInfo }: IProps) => {
                 mt="0"
                 minH={{ base: "auto", md: "100vh" }}
                 pb={{ base: 10, md: 0 }}
-                bgImage={poster_path ? `url(https://image.tmdb.org/t/p/original${poster_path})` : `url(${bglogo})`}
+                bgImage={`url(https://image.tmdb.org/t/p/original${poster_path})`}
                 bgRepeat="no-repeat"
                 bgSize="cover"
                 bgPosition="center"
